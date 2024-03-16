@@ -10,22 +10,22 @@ public abstract class Vehicle {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "taxa_base")
+    @Column(name = "base_rate")
     protected Double baseRate;
 
-    @Column(name = "taxa_hora")
+    @Column(name = "hourly_rate")
     protected Double hourlyRate;
 
-    @Column(name = "nome_proprietario")
+    @Column(name = "owner_name")
     protected String ownerName;
 
-    @Column(name = "placa")
+    @Column(name = "license_plate")
     protected String licensePlate;
 
-    @Column(name = "preferencial")
+    @Column(name = "preferential")
     protected Boolean preferential;
 
-    @Column(name = "tipo_veiculo")
+    @Column(name = "vehicle_type")
     protected String vehicleType;
 
     @ManyToOne
