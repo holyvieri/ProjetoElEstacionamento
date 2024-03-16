@@ -2,7 +2,7 @@ package com.upe.ProjetoElEstacionamento.model;
 
 import jakarta.persistence.*;
 
-
+@Entity
 @Table(name = "parking_spaces")
 public class ParkingSpace {
     @Id

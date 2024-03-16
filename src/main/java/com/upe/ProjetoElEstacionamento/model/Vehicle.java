@@ -28,7 +28,7 @@ public abstract class Vehicle {
     @Column(name = "vehicle_type")
     protected String vehicleType;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "parking_space_id")
     private ParkingSpace parkingSpace;
 
