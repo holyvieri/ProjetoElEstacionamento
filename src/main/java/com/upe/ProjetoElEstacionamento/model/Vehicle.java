@@ -13,12 +13,6 @@ public abstract class Vehicle {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "base_rate")
-    private Double baseRate;
-
-    @Column(name = "hourly_rate")
-    private Double hourlyRate;
-
     @Column(name = "owner_name")
     protected String ownerName;
 
@@ -35,16 +29,12 @@ public abstract class Vehicle {
     @JoinColumn(name = "parking_space_id")
     private ParkingSpace parkingSpace;
 
-    public Vehicle(String ownerName, String licensePlate, Boolean preferential, String vehicleType) {
+    public Vehicle(String ownerName, String licensePlate, Boolean preferential) {
         this.ownerName = ownerName;
         this.licensePlate = licensePlate;
         this.preferential = preferential;
     }
-
-    public Vehicle() {
-
-    }
-
+    public Vehicle() {}
 
     // Getters and Setters
 
@@ -96,19 +86,4 @@ public abstract class Vehicle {
         this.parkingSpace = parkingSpace;
     }
 
-    public Double getBaseRate() {
-        return baseRate;
-    }
-
-    public void setBaseRate(Double baseRate) {
-        this.baseRate = baseRate;
-    }
-
-    public Double getHourlyRate() {
-        return hourlyRate;
-    }
-
-    public void setHourlyRate(Double hourlyRate) {
-        this.hourlyRate = hourlyRate;
-    }
 }
