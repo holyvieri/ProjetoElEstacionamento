@@ -9,6 +9,7 @@ import javax.xml.crypto.Data;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "vehicle_type", discriminatorType = DiscriminatorType.STRING)
 public abstract class Vehicle {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,12 +28,19 @@ public abstract class Vehicle {
     @JoinColumn(name = "parking_space_id")
     private ParkingSpace parkingSpace;
 
-    public Vehicle(String ownerName, String licensePlate, Boolean preferential) {
+    public Vehicle(String ownerName, String licensePlate, Boolean preferential, ParkingSpace parkingSpace) {
         this.ownerName = ownerName;
         this.licensePlate = licensePlate;
         this.preferential = preferential;
+        this.parkingSpace = parkingSpace;
     }
+
     public Vehicle() {}
+
+    public void setRates(double base_rate, double hourly_rate){
+        parkingSpace.setBaseRate(base_rate);
+        parkingSpace.setHourly_rate(hourly_rate);
+    }
 
     // Getters and Setters
 
@@ -76,5 +84,4 @@ public abstract class Vehicle {
     public void setParkingSpace(ParkingSpace parkingSpace) {
         this.parkingSpace = parkingSpace;
     }
-
 }

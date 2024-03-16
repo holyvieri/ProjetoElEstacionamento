@@ -29,45 +29,71 @@ public class ParkingSpace {
     private String spaceType;
 
     @Column(name = "date")
-    private String date;
+    private String date = date.substring();
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
-    public void setOccupied(boolean occupied) {
-        this.occupied = occupied;
-    }
-
-    public void setPreferential(boolean preferential) {
-        this.preferential = preferential;
-    }
-
-    public void setSpaceType(String spaceType) {
-        this.spaceType = spaceType;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
+    public double payment(){
+        if (preferential == True){
+            return 0.0;
+        }else{
+            double secs = Double.parseDouble(date);
+            return baseRate+hourly_rate*secs;
+        }
     }
 
     public Long getId() {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public boolean isOccupied() {
         return occupied;
+    }
+
+    public void setOccupied(boolean occupied) {
+        this.occupied = occupied;
     }
 
     public boolean isPreferential() {
         return preferential;
     }
 
+    public void setPreferential(boolean preferential) {
+        this.preferential = preferential;
+    }
+
+    public Double getBaseRate() {
+        return baseRate;
+    }
+
+    public void setBaseRate(Double baseRate) {
+        this.baseRate = baseRate;
+    }
+
+    public Double getHourly_rate() {
+        return hourly_rate;
+    }
+
+    public void setHourly_rate(Double hourly_rate) {
+        this.hourly_rate = hourly_rate;
+    }
+
     public String getSpaceType() {
         return spaceType;
     }
 
+    public void setSpaceType(String spaceType) {
+        this.spaceType = spaceType;
+    }
+
     public String getDate() {
         return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }
