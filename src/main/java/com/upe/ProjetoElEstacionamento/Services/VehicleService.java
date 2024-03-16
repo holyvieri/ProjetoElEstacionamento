@@ -19,48 +19,47 @@ public class VehicleService {
     private BusRepository busRepository; // Repositório para Ônibus
     @Autowired
     private MotorcycleRepository motorcycleRepository; // Repositório para Motocicletas
+    @Autowired
+    private VehicleRepository vehicleRepository;
 
     @Autowired
     private ParkingSpaceRepository parkingSpaceRepository;
 
     public Vehicle createVehicle(VehicleDTO vehicleDTO) {
         // Lógica para criar um novo veículo e associar à vaga correta
-        ParkingSpace parkingSpace = parkingSpaceRepository.findAvailableSpaceByType(vehicleDTO.getVehicleType());
-        if (parkingSpace == null) {
-            throw new RuntimeException("Nenhuma vaga disponível do tipo especificado.");
-        }
+        ParkingSpace parkingSpace = parkingSpaceRepository.findById(vehicleDTO.getParkingSpaceId())
+                .orElseThrow(() -> new RuntimeException("Vaga não encontrada com o ID especificado."));
 
-        if (parkingSpace.isPreferential()) {
+        if (parkingSpace.isOccupied()) {
             throw new RuntimeException("A vaga escolhida já está ocupada.");
         }
 
+        // Cria um novo veículo com base nos dados do DTO
         Vehicle newVehicle;
         switch (vehicleDTO.getVehicleType()) {
             case "Car":
                 newVehicle = new Car(vehicleDTO.getOwnerName(), vehicleDTO.getLicensePlate(), vehicleDTO.getPreferential());
-                carRepository.save((Car) newVehicle);
                 break;
             case "Bike":
                 newVehicle = new Bike(vehicleDTO.getOwnerName(), vehicleDTO.getLicensePlate(), vehicleDTO.getPreferential());
-                bikeRepository.save((Bike) newVehicle);
                 break;
             case "Bus":
                 newVehicle = new Bus(vehicleDTO.getOwnerName(), vehicleDTO.getLicensePlate(), vehicleDTO.getPreferential());
-                busRepository.save((Bus) newVehicle);
                 break;
             case "Motorcycle":
                 newVehicle = new Motorcycle(vehicleDTO.getOwnerName(), vehicleDTO.getLicensePlate(), vehicleDTO.getPreferential());
-                motorcycleRepository.save((Motorcycle) newVehicle);
                 break;
             default:
                 throw new IllegalArgumentException("Tipo de veículo inválido.");
         }
 
+        // Associa o veículo à vaga
         newVehicle.setParkingSpace(parkingSpace);
         parkingSpace.setOccupied(true);
         parkingSpaceRepository.save(parkingSpace);
 
-        return newVehicle;
+        // Salva o novo veículo no repositório
+        return vehicleRepository.save(newVehicle);
     }
 
     public void removeVehicleFromSpace(Integer vehicleId) {

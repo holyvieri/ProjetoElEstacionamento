@@ -19,6 +19,18 @@ public class ParkingSpace {
     @Column(name = "preferential")
     private boolean preferential;
 
+    @Column(name = "base_rate")
+    private Double baseRate;
+
+    @Column(name = "hourly_rate")
+    private Double hourly_rate;
+
+    @Column(name = "space_type")
+    private String spaceType;
+
+    @Column(name = "date")
+    private String date;
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -58,12 +70,4 @@ public class ParkingSpace {
     public String getDate() {
         return date;
     }
-
-    @Column(name = "space_type")
-    private String spaceType;
-
-    @Column(name = "date")
-    private String date;
-
-
 }

@@ -12,11 +12,4 @@ public class Motorcycle extends Vehicle{
         super(ownerName, licensePlate, preferential);
     }
 
-    public Double getTax() {
-        return tax;
-    }
-
-    public Double getAdditionalTaxPerHour() {
-        return additionalTaxPerHour;
-    }
 }

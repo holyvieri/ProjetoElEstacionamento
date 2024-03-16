@@ -22,8 +22,6 @@ public abstract class Vehicle {
     @Column(name = "preferential")
     protected Boolean preferential;
 
-    @Column(name = "vehicle_type")
-    protected String vehicleType;
 
     @OneToOne
     @JoinColumn(name = "parking_space_id")
@@ -70,13 +68,6 @@ public abstract class Vehicle {
         this.preferential = preferential;
     }
 
-    public String getVehicleType() {
-        return vehicleType;
-    }
-
-    public void setVehicleType(String vehicleType) {
-        this.vehicleType = vehicleType;
-    }
 
     public ParkingSpace getParkingSpace() {
         return parkingSpace;

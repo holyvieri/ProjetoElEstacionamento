@@ -29,7 +29,15 @@ public class VehicleController {
     }
 
     //vai receber JSON do front
-
+    @PostMapping("/create")
+    public ResponseEntity<Vehicle> createVehicle(@RequestBody VehicleDTO vehicleDTO) {
+        try {
+            Vehicle newVehicle = vehicleService.createVehicle(vehicleDTO);
+            return ResponseEntity.status(HttpStatus.CREATED).body(newVehicle);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+    }
     @GetMapping("/{id}")
     public ResponseEntity<Vehicle> getVehicleById(@PathVariable Integer id) {
         Vehicle vehicle = vehicleService.findVehicleById(id);
