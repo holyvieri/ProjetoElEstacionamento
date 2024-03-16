@@ -28,7 +28,7 @@ public class VehicleService {
 
         // Cria um novo veículo com base nos dados do DTO
         Vehicle newVehicle;
-        switch (vehicleDTO.getVehicleType()) {
+        switch () {
             case "Car":
                 newVehicle = new Car(vehicleDTO.getOwnerName(), vehicleDTO.getLicensePlate(), vehicleDTO.getPreferential());
                 break;

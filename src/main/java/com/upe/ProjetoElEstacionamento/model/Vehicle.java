@@ -8,7 +8,7 @@ import javax.xml.crypto.Data;
 @Table(name = "vehicles")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "vehicle_type", discriminatorType = DiscriminatorType.STRING)
-public abstract class Vehicle {
+public class Vehicle {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,13 +22,15 @@ public abstract class Vehicle {
 
     @Column(name = "preferential")
     protected Boolean preferential;
-
+    @Enumerated(EnumType.STRING)
+    @Column(name = "vehicle_type")
+    private VehicleTypes vehicleType;
 
     @OneToOne
     @JoinColumn(name = "parking_space_id")
     private ParkingSpace parkingSpace;
 
-    public Vehicle(String ownerName, String licensePlate, Boolean preferential, ParkingSpace parkingSpace) {
+    public Vehicle(String ownerName, String licensePlate, Boolean preferential, VehicleTypes vehicleType,ParkingSpace parkingSpace) {
         this.ownerName = ownerName;
         this.licensePlate = licensePlate;
         this.preferential = preferential;
