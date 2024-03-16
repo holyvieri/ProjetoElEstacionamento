@@ -29,7 +29,7 @@ public class Vehicle {
     private VehicleTypes vehicleType;
 
     @OneToOne
-    @JoinColumn(name = "parking_space_id")
+    @JoinColumn(name = "parking_space")
     private ParkingSpace parkingSpace;
 
     public Vehicle(String ownerName, String licensePlate, Boolean vehiclePreferential, VehicleTypes vehicleType,ParkingSpace parkingSpace) {
