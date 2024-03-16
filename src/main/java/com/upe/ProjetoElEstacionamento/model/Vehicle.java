@@ -39,6 +39,10 @@ public abstract class Vehicle {
         this.vehicleType = vehicleType;
     }
 
+    public Vehicle() {
+
+    }
+
     public abstract void entry();
     public abstract void payment();
 
