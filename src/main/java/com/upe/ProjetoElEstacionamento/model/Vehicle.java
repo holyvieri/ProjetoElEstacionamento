@@ -34,19 +34,15 @@ public abstract class Vehicle {
     @JoinColumn(name = "parking_space_id")
     private ParkingSpace parkingSpace;
 
-    public Vehicle(String ownerName, String licensePlate, Boolean preferential, String vehicleType) {
+    public Vehicle(String ownerName, String licensePlate, Boolean preferential) {
         this.ownerName = ownerName;
         this.licensePlate = licensePlate;
         this.preferential = preferential;
-        this.vehicleType = vehicleType;
     }
 
     public Vehicle() {
 
     }
-
-    public abstract void entry();
-
 
     // Getters and Setters
 
