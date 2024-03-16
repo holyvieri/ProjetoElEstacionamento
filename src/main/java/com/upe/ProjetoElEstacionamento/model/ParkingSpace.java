@@ -29,9 +29,17 @@ public class ParkingSpace {
     private String spaceType;
 
     @Column(name = "date")
-    private String date;
+    private String date = date.substring();
 
 
+    public double payment(){
+        if (preferential == True){
+            return 0.0;
+        }else{
+            double secs = Double.parseDouble(date);
+            return baseRate+hourly_rate*secs;
+        }
+    }
     public void setId(Long id) {
         this.id = id;
     }
@@ -67,5 +75,4 @@ public class ParkingSpace {
     public void setDate(String date) {
         this.date = date;
     }
-
 }

@@ -5,12 +5,9 @@ import jakarta.persistence.Entity;
 
 @Entity
 @DiscriminatorValue("Bike")
-public class Bike extends Vehicle{
-    private ParkingSpace parkingSpace;
-//    baseRate = 1.0;
-//    hourlyRate = 0.25;
-    public Bike(String ownerName, String licensePlate, Boolean preferential){
-        super(ownerName, licensePlate, preferential);
+public class Bike extends Vehicle {
+    public Bike(String ownerName, String licensePlate, Boolean preferential, ParkingSpace parkingSpace) {
+        super(ownerName, licensePlate, preferential, parkingSpace);
+        setRates(1.0, 0.25);
     }
-
 }
