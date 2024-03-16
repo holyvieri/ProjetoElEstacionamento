@@ -1,4 +1,4 @@
-package com.upe.ProjetoElEstacionamento.Entities;
+package com.upe.ProjetoElEstacionamento.model;
 
 public enum VehicleType {
     CAR,
