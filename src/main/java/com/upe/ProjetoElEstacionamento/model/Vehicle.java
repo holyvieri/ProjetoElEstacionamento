@@ -1,4 +1,4 @@
-package com.upe.ProjetoElEstacionamento.Entities;
+package com.upe.ProjetoElEstacionamento.model;
 
 import jakarta.persistence.*;
 
@@ -27,6 +27,10 @@ public abstract class Vehicle {
         this.licensePlate = licensePlate;
         this.preferential = preferential;
         this.vehicleType = vehicleType;
+    }
+
+    public Vehicle() {
+
     }
 
     public abstract void entry();
