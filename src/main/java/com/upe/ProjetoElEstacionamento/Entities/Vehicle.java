@@ -8,8 +8,10 @@ public abstract class Vehicle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "tax")
+    @Column(name = "taxa")
     protected Double tax;
+    @Column(name = "taxa_hora")
+    protected Double tax_hour;
     @Column(name = "nome_proprietario")
     protected String name;
     @Column(name = "placa")
