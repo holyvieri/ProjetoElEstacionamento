@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface VagaRepository extends JpaRepository<ParkingSpace, Long> {
+public interface ParkingSpaceRepository extends JpaRepository<ParkingSpace, Long> {
     @Override
     List<ParkingSpace> findAll();
 }
