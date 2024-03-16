@@ -1,31 +1,39 @@
-package com.upe.ProjetoElEstacionamento.Entities;
+package com.upe.ProjetoElEstacionamento.model;
 
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "veiculos")
+@Table(name = "vehicles")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Vehicle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "taxa")
-    protected Double tax;
+
+    @Column(name = "taxa_base")
+    protected Double baseRate;
+
     @Column(name = "taxa_hora")
-    protected Double tax_hour;
+    protected Double hourlyRate;
+
     @Column(name = "nome_proprietario")
-    protected String name;
+    protected String ownerName;
+
     @Column(name = "placa")
     protected String licensePlate;
+
     @Column(name = "preferencial")
     protected Boolean preferential;
-    @Column(name = "tipo_veiculo")
-    protected VehicleType vehicleType;
-    @OneToOne
-    @JoinColumn(name = "vaga_id")
-    private Vaga vaga;
 
-    public Vehicle(String name, String licensePlate, Boolean preferential, VehicleType vehicleType) {
-        this.name = name;
+    @Column(name = "tipo_veiculo")
+    protected String vehicleType;
+
+    @ManyToOne
+    @JoinColumn(name = "parking_space_id")
+    private ParkingSpace parkingSpace;
+
+    public Vehicle(String ownerName, String licensePlate, Boolean preferential, String vehicleType) {
+        this.ownerName = ownerName;
         this.licensePlate = licensePlate;
         this.preferential = preferential;
         this.vehicleType = vehicleType;
@@ -33,4 +41,6 @@ public abstract class Vehicle {
 
     public abstract void entry();
     public abstract void payment();
+
+    // Getters and Setters
 }
