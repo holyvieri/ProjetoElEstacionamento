@@ -3,8 +3,8 @@ package com.upe.ProjetoElEstacionamento.model;
 public class Motorcycle extends Vehicle{
     private final Double tax = 6.5;
     private final Double additionalTaxPerHour = 2.0;
-    public Motorcycle(String name, String licensePlate, Boolean preferential, VehicleType vehicleType) {
-        super(name, licensePlate, preferential, String.valueOf(vehicleType));
+    public Motorcycle(String ownerName, String licensePlate, Boolean preferential, VehicleType vehicleType) {
+        super(ownerName, licensePlate, preferential, String.valueOf(vehicleType));
     }
 
     @Override
@@ -12,9 +12,11 @@ public class Motorcycle extends Vehicle{
 
     }
 
-    @Override
-    public void payment() {
-
+    public Double getTax() {
+        return tax;
     }
 
+    public Double getAdditionalTaxPerHour() {
+        return additionalTaxPerHour;
+    }
 }
