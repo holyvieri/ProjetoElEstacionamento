@@ -8,7 +8,7 @@ import jakarta.persistence.Entity;
 public class Bike extends Vehicle{
 //    baseRate = 1.0;
 //    hourlyRate = 0.25;
-    public Bike(String ownerName, String licensePlate, Boolean preferential, VehicleType vehicleType){
+    public Bike(String ownerName, String licensePlate, Boolean preferential){
         super(ownerName, licensePlate, preferential, String.valueOf(vehicleType));
     }
     @Override

@@ -1,5 +1,11 @@
 package com.upe.ProjetoElEstacionamento.DTOs;
 
+import com.upe.ProjetoElEstacionamento.model.ParkingSpace;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+import java.util.Optional;
+
 public class VehicleDTO {
     private String ownerName;
     private String licensePlate;
@@ -46,4 +52,5 @@ public class VehicleDTO {
     public void setParkingSpaceId(Long parkingSpaceId) {
         this.parkingSpaceId = parkingSpaceId;
     }
+
 }

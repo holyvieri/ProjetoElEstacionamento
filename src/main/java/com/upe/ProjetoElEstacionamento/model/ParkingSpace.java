@@ -39,6 +39,26 @@ public class ParkingSpace {
         this.date = date;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public boolean isOccupied() {
+        return occupied;
+    }
+
+    public boolean isPreferential() {
+        return preferential;
+    }
+
+    public String getSpaceType() {
+        return spaceType;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
     @Column(name = "space_type")
     private String spaceType;
 
