@@ -6,7 +6,8 @@ import javax.xml.crypto.Data;
 
 @Entity
 @Table(name = "vehicles")
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "vehicle_type", discriminatorType = DiscriminatorType.STRING)
 public abstract class Vehicle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,14 +39,11 @@ public abstract class Vehicle {
         this.ownerName = ownerName;
         this.licensePlate = licensePlate;
         this.preferential = preferential;
-        this.vehicleType = vehicleType;
     }
 
     public Vehicle() {
 
     }
-
-    public abstract void entry();
 
 
     // Getters and Setters
