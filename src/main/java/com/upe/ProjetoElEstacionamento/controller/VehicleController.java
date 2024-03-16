@@ -49,7 +49,6 @@ public class VehicleController {
         veiculo.setOwnerName(veiculoDTO.getOwnerName());
         veiculo.setLicensePlate(veiculoDTO.getLicensePlate());
         veiculo.setPreferential(veiculoDTO.getPreferential());
-        veiculo.setVehicleType(veiculoDTO.getVehicleType());
         veiculo.setParkingSpace(vagaEscolhida);
 
         // Marca a vaga como ocupada

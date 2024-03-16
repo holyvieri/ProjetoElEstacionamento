@@ -19,6 +19,19 @@ public class ParkingSpace {
     @Column(name = "preferential")
     private boolean preferential;
 
+    @Column(name = "base_rate")
+    private Double baseRate;
+
+    @Column(name = "hourly_rate")
+    private Double hourly_rate;
+
+    @Column(name = "space_type")
+    private String spaceType;
+
+    @Column(name = "date")
+    private String date;
+
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -31,6 +44,22 @@ public class ParkingSpace {
         this.preferential = preferential;
     }
 
+    public Double getBaseRate() {
+        return baseRate;
+    }
+
+    public void setBaseRate(Double baseRate) {
+        this.baseRate = baseRate;
+    }
+
+    public Double getHourly_rate() {
+        return hourly_rate;
+    }
+
+    public void setHourly_rate(Double hourly_rate) {
+        this.hourly_rate = hourly_rate;
+    }
+
     public void setSpaceType(String spaceType) {
         this.spaceType = spaceType;
     }
@@ -38,12 +67,5 @@ public class ParkingSpace {
     public void setDate(String date) {
         this.date = date;
     }
-
-    @Column(name = "space_type")
-    private String spaceType;
-
-    @Column(name = "date")
-    private String date;
-
 
 }
