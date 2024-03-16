@@ -12,14 +12,6 @@ import java.util.Optional;
 @Service
 public class VehicleService {
     @Autowired
-    private CarRepository carRepository; // Repositório para Carros
-    @Autowired
-    private BikeRepository bikeRepository; // Repositório para Bicicletas
-    @Autowired
-    private BusRepository busRepository; // Repositório para Ônibus
-    @Autowired
-    private MotorcycleRepository motorcycleRepository; // Repositório para Motocicletas
-    @Autowired
     private VehicleRepository vehicleRepository;
 
     @Autowired
@@ -41,7 +33,7 @@ public class VehicleService {
                 newVehicle = new Car(vehicleDTO.getOwnerName(), vehicleDTO.getLicensePlate(), vehicleDTO.getPreferential());
                 break;
             case "Bike":
-                newVehicle = new Bike(vehicleDTO.getOwnerName(), vehicleDTO.getLicensePlate(), vehicleDTO.getPreferential());
+                newVehicle = new Bike(vehicleDTO.getOwnerName(), vehicleDTO.getLicensePlate(), vehicleDTO.getPreferential(), vehicleDTO.getParkingSpaceId());
                 break;
             case "Bus":
                 newVehicle = new Bus(vehicleDTO.getOwnerName(), vehicleDTO.getLicensePlate(), vehicleDTO.getPreferential());
