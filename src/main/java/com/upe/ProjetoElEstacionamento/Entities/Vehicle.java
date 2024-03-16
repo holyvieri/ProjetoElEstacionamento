@@ -1,5 +1,10 @@
 package com.upe.ProjetoElEstacionamento.Entities;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "veiculos")
 public abstract class Vehicle {
     protected Double tax;
     protected String name;
