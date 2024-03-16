@@ -1,5 +1,6 @@
 package com.upe.ProjetoElEstacionamento.DTOs;
 
+import com.upe.ProjetoElEstacionamento.model.VehicleTypes;
 import jakarta.persistence.Column;
 
 public class ParkingSpaceDTO {
@@ -8,7 +9,7 @@ public class ParkingSpaceDTO {
 
     private boolean preferential;
 
-    private String spaceType;
+    private VehicleTypes spaceType;
 
     private String date;
 
@@ -36,11 +37,11 @@ public class ParkingSpaceDTO {
         this.preferential = preferential;
     }
 
-    public String getSpaceType() {
+    public VehicleTypes getSpaceType() {
         return spaceType;
     }
 
-    public void setSpaceType(String spaceType) {
+    public void setSpaceType(VehicleTypes spaceType) {
         this.spaceType = spaceType;
     }
 
