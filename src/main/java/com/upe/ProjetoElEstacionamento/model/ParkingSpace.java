@@ -19,6 +19,7 @@ public class ParkingSpace {
     @Column(name = "preferential")
     private boolean preferential;
 
+<<<<<<< HEAD
     @Column(name = "base_rate")
     private Double baseRate;
 
@@ -40,12 +41,25 @@ public class ParkingSpace {
             return baseRate+hourly_rate*secs;
         }
     }
+
+    public Long getId() {
+        return id;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
 
+    public boolean isOccupied() {
+        return occupied;
+    }
+
     public void setOccupied(boolean occupied) {
         this.occupied = occupied;
+    }
+
+    public boolean isPreferential() {
+        return preferential;
     }
 
     public void setPreferential(boolean preferential) {
@@ -68,8 +82,16 @@ public class ParkingSpace {
         this.hourly_rate = hourly_rate;
     }
 
+    public String getSpaceType() {
+        return spaceType;
+    }
+
     public void setSpaceType(String spaceType) {
         this.spaceType = spaceType;
+    }
+
+    public String getDate() {
+        return date;
     }
 
     public void setDate(String date) {

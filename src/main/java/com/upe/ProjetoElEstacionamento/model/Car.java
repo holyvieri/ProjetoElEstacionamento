@@ -10,4 +10,5 @@ public class Car extends Vehicle{
         super(ownerName, licensePlate, preferential, parkingSpace);
         setRates(11.5,1.0);
     }
+
 }

@@ -10,4 +10,5 @@ public class Motorcycle extends Vehicle{
         super(ownerName, licensePlate, preferential, parkingSpace);
         setRates(6.5,2.0);
     }
+
 }

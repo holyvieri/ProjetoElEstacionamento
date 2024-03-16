@@ -9,5 +9,4 @@ public class Bike extends Vehicle {
     public Bike(String ownerName, String licensePlate, Boolean preferential, ParkingSpace parkingSpace) {
         super(ownerName, licensePlate, preferential, parkingSpace);
         setRates(1.0, 0.25);
-    }
 }
