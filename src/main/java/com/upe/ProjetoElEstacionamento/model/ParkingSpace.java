@@ -33,7 +33,7 @@ public class ParkingSpace {
 
 
     public double payment(){
-        if (preferential == True){
+        if (preferential){
             return 0.0;
         }else{
             double secs = Double.parseDouble(date);
