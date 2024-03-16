@@ -19,7 +19,6 @@ public class ParkingSpace {
     @Column(name = "preferential")
     private boolean preferential;
 
-<<<<<<< HEAD
     @Column(name = "base_rate")
     private Double baseRate;
 
