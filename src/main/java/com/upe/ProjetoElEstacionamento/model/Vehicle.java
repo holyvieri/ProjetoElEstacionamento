@@ -2,6 +2,8 @@ package com.upe.ProjetoElEstacionamento.model;
 
 import jakarta.persistence.*;
 
+import javax.xml.crypto.Data;
+
 @Entity
 @Table(name = "vehicles")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -11,10 +13,10 @@ public abstract class Vehicle {
     private Long id;
 
     @Column(name = "base_rate")
-    protected Double baseRate;
+    private Double baseRate;
 
     @Column(name = "hourly_rate")
-    protected Double hourlyRate;
+    private Double hourlyRate;
 
     @Column(name = "owner_name")
     protected String ownerName;
@@ -44,7 +46,71 @@ public abstract class Vehicle {
     }
 
     public abstract void entry();
-    public abstract void payment();
+
 
     // Getters and Setters
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
+    }
+
+    public String getLicensePlate() {
+        return licensePlate;
+    }
+
+    public void setLicensePlate(String licensePlate) {
+        this.licensePlate = licensePlate;
+    }
+
+    public Boolean getPreferential() {
+        return preferential;
+    }
+
+    public void setPreferential(Boolean preferential) {
+        this.preferential = preferential;
+    }
+
+    public String getVehicleType() {
+        return vehicleType;
+    }
+
+    public void setVehicleType(String vehicleType) {
+        this.vehicleType = vehicleType;
+    }
+
+    public ParkingSpace getParkingSpace() {
+        return parkingSpace;
+    }
+
+    public void setParkingSpace(ParkingSpace parkingSpace) {
+        this.parkingSpace = parkingSpace;
+    }
+
+    public Double getBaseRate() {
+        return baseRate;
+    }
+
+    public void setBaseRate(Double baseRate) {
+        this.baseRate = baseRate;
+    }
+
+    public Double getHourlyRate() {
+        return hourlyRate;
+    }
+
+    public void setHourlyRate(Double hourlyRate) {
+        this.hourlyRate = hourlyRate;
+    }
 }

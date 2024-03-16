@@ -2,6 +2,10 @@ package com.upe.ProjetoElEstacionamento.model;
 
 import jakarta.persistence.*;
 
+
+import javax.swing.text.DateFormatter;
+import javax.xml.crypto.Data;
+
 @Entity
 @Table(name = "parking_spaces")
 public class ParkingSpace {
@@ -19,7 +23,9 @@ public class ParkingSpace {
     private String spaceType;
 
     @Column(name = "date")
-    private String date;
+    private String date = ;
 
-
+    private Double payment(Vehicle vehicle, String data){
+        return vehicle.
+    }
 }
