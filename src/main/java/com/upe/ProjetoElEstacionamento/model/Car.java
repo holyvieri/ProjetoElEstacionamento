@@ -1,4 +1,4 @@
-package com.upe.ProjetoElEstacionamento.Entities;
+package com.upe.ProjetoElEstacionamento.model;
 
 public class Car extends Vehicle{
     private final Double tax = 11.5;
