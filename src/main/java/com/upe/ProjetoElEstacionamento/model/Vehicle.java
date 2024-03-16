@@ -21,14 +21,18 @@ public class Vehicle {
     protected String licensePlate;
 
     @Column(name = "preferential")
+
     protected Boolean vehiclePreferential;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "vehicle_type")
+    private VehicleTypes vehicleType;
 
     @OneToOne
     @JoinColumn(name = "parking_space_id")
     private ParkingSpace parkingSpace;
 
-    public Vehicle(String ownerName, String licensePlate, Boolean preferential, ParkingSpace parkingSpace) {
+    public Vehicle(String ownerName, String licensePlate, Boolean preferential, VehicleTypes vehicleType,ParkingSpace parkingSpace) {
         this.ownerName = ownerName;
         this.licensePlate = licensePlate;
         this.preferential = preferential;
