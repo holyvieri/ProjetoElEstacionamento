@@ -25,7 +25,7 @@ public class Vehicle {
     protected Boolean vehiclePreferential;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "vehicle_type")
+    @Column(name = "vehicle_type", insertable=false, updatable=false)
     private VehicleTypes vehicleType;
 
     @OneToOne
@@ -69,11 +69,11 @@ public class Vehicle {
     }
 
     public Boolean getPreferential() {
-        return preferential;
+        return vehiclePreferential;
     }
 
-    public void setPreferential(Boolean preferential) {
-        this.preferential = preferential;
+    public void setPreferential(Boolean vehiclePreferential) {
+        this.vehiclePreferential = vehiclePreferential;
     }
 
 

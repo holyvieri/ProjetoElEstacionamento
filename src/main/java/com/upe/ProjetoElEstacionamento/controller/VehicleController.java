@@ -27,8 +27,19 @@ public class VehicleController {
         List<Vehicle> veiculos = repository.findAll();
         return ResponseEntity.ok(veiculos);
     }
+    @GetMapping("/{id}")
+    public ResponseEntity<Vehicle> getVehicleById(@PathVariable Long id) {
+        Vehicle vehicle = vehicleService.findVehicleById(id);
+        if (vehicle != null) {
+            return ResponseEntity.ok(vehicle);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
-    //vai receber JSON do front
+
+    //POST
+    //vai receber JSON do front - DTO
     @PostMapping("/create")
     public ResponseEntity<Vehicle> createVehicle(@RequestBody VehicleDTO vehicleDTO) {
         try {
@@ -38,13 +49,8 @@ public class VehicleController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
     }
-    @GetMapping("/{id}")
-    public ResponseEntity<Vehicle> getVehicleById(@PathVariable Integer id) {
-        Vehicle vehicle = vehicleService.findVehicleById(id);
-        if (vehicle != null) {
-            return ResponseEntity.ok(vehicle);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
+
+
+    //DELETE
+
 }

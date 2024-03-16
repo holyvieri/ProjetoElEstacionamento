@@ -29,7 +29,7 @@ public class ParkingSpace {
     private String spaceType;
 
     @Column(name = "date")
-    private String date = date.substring();
+    private String date;
 
 
     public ParkingSpace(Long id, boolean occupied, boolean spacePreferential, Double baseRate, Double hourly_rate, String spaceType, String date) {

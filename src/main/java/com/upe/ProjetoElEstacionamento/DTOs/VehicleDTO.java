@@ -1,11 +1,14 @@
 package com.upe.ProjetoElEstacionamento.DTOs;
 
+import com.upe.ProjetoElEstacionamento.model.ParkingSpace;
+import com.upe.ProjetoElEstacionamento.model.VehicleTypes;
+
 public class VehicleDTO {
     private String ownerName;
     private String licensePlate;
     private Boolean preferential;
-    private String vehicleType;
-    private Long parkingSpaceId;
+    private VehicleTypes vehicleType;
+    private ParkingSpace parkingSpace;
 
     public String getOwnerName() {
         return ownerName;
@@ -31,20 +34,20 @@ public class VehicleDTO {
         this.preferential = preferential;
     }
 
-    public String getVehicleType() {
+    public VehicleTypes getVehicleType() {
         return vehicleType;
     }
 
-    public void setVehicleType(String vehicleType) {
+    public void setVehicleType(VehicleTypes vehicleType) {
         this.vehicleType = vehicleType;
     }
 
-    public Long getParkingSpaceId() {
-        return parkingSpaceId;
+    public ParkingSpace getParkingSpace() {
+        return parkingSpace;
     }
 
-    public void setParkingSpaceId(Long parkingSpaceId) {
-        this.parkingSpaceId = parkingSpaceId;
+    public void setParkingSpace(ParkingSpace parkingSpace) {
+        this.parkingSpace = parkingSpace;
     }
 
 }
