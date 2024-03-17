@@ -50,4 +50,5 @@ public class VehicleDTO {
         this.parkingSpace = parkingSpace;
     }
 
+
 }

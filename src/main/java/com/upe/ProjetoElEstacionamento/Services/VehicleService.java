@@ -14,23 +14,26 @@ public class VehicleService {
     @Autowired
     private ParkingSpaceRepository parkingSpaceRepository;
 
+    //ok
     public Vehicle createVehicle(VehicleDTO vehicleDTO) {
         // Lógica para criar um novo veículo e associar à vaga correta
+        //achar id da vaga e checar se ela existe
         ParkingSpace parkingSpace = parkingSpaceRepository.findById(vehicleDTO.getParkingSpace().getId())
                 .orElseThrow(() -> new RuntimeException("Vaga não encontrada com o ID especificado."));
 
+        //checar se vaga tá ocupada
         if (parkingSpace.isOccupied()) {
             throw new RuntimeException("A vaga escolhida já está ocupada.");
+        } else {
+            // Cria um novo veículo com base nos dados do DTO
+            Vehicle newVehicle = new Vehicle(vehicleDTO.getOwnerName(), vehicleDTO.getLicensePlate(),
+                    vehicleDTO.getPreferential(), vehicleDTO.getVehicleType(), vehicleDTO.getParkingSpace());
+            newVehicle.setParkingSpace(parkingSpace);
+            parkingSpace.setOccupied(true);
+            parkingSpaceRepository.save(parkingSpace);
+
+            return vehicleRepository.save(newVehicle);
         }
-
-        // Cria um novo veículo com base nos dados do DTO
-        Vehicle newVehicle = new Vehicle(vehicleDTO.getOwnerName(), vehicleDTO.getLicensePlate(),
-                vehicleDTO.getPreferential(), vehicleDTO.getVehicleType(), vehicleDTO.getParkingSpace());
-        newVehicle.setParkingSpace(parkingSpace);
-        parkingSpace.setOccupied(true);
-        parkingSpaceRepository.save(parkingSpace);
-
-        return vehicleRepository.save(newVehicle);
 
     }
     public void removeVehicleFromSpace(Long vehicleId) {

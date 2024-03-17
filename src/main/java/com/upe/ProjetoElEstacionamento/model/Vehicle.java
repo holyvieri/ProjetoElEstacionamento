@@ -6,8 +6,8 @@ import javax.xml.crypto.Data;
 
 @Entity
 @Table(name = "vehicles")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "vehicle_type", discriminatorType = DiscriminatorType.STRING)
+//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+//@DiscriminatorColumn(name = "vehicle_type", discriminatorType = DiscriminatorType.STRING)
 public class Vehicle {
 
     @Id
@@ -25,7 +25,7 @@ public class Vehicle {
     protected Boolean vehiclePreferential;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "vehicle_type", insertable=false, updatable=false)
+    @Column(name = "vehicle_type")
     private VehicleTypes vehicleType;
 
     @OneToOne
