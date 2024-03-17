@@ -53,24 +53,21 @@ public class ParkingSpaceService {
         }
     }
 
-    public ParkingSpace startTiming(Long spaceId) {
+    public void startTiming(Long spaceId) {
         ParkingSpace space = parkingSpaceRepository.findById(spaceId)
                 .orElseThrow(() -> new RuntimeException("Vaga não encontrada com o ID especificado."));
 
         space.setEnterTime(LocalDateTime.now());
         parkingSpaceRepository.save(space);
 
-        return space;
     }
 
-    public ParkingSpace endTiming(Long spaceId) {
+    public void endTiming(Long spaceId) {
         ParkingSpace space = parkingSpaceRepository.findById(spaceId)
                 .orElseThrow(() -> new RuntimeException("Estacionamento não encontrado"));
 
         space.setExitTime(LocalDateTime.now());
         parkingSpaceRepository.save(space);
-
-        return space;
     }
 
 
