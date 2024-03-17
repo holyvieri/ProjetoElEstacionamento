@@ -52,7 +52,7 @@ public class VehicleController {
     }
     @DeleteMapping("/deletar")
     public ResponseEntity<Void> deleteVehicle(@RequestBody VehicleDTO vehicleDTO){
-        vehicleService.removeVehicleFromSpace(vehicleDTO.getParkingSpace().getId());
+        vehicleService.removeVehicleFromSpace(vehicleDTO.getParkingSpace().getSpaceId());
         return ResponseEntity.ok().build();
     }
 }
