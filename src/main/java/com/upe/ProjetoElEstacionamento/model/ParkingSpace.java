@@ -2,7 +2,6 @@ package com.upe.ProjetoElEstacionamento.model;
 
 import jakarta.persistence.*;
 
-import java.time.Duration;
 import java.time.LocalDateTime;
 
 @Entity

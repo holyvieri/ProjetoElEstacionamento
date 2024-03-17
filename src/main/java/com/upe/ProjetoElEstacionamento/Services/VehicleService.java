@@ -14,19 +14,22 @@ import java.time.LocalDateTime;
 
 @Service
 public class VehicleService {
-    @Autowired
     private VehicleRepository vehicleRepository;
 
-    @Autowired
     private ParkingSpaceRepository parkingSpaceRepository;
 
+    @Autowired
+    public VehicleService(VehicleRepository vehicleRepository, ParkingSpaceRepository parkingSpaceRepository) {
+        this.vehicleRepository = vehicleRepository;
+        this.parkingSpaceRepository = parkingSpaceRepository;
+    }
 
     // Lógica para criar um novo veículo e associar à vaga correta
     public Vehicle createVehicle(VehicleDTO vehicleDTO) {
         // Achar id da vaga e checar se ela existe
+
         ParkingSpace parkingSpace = parkingSpaceRepository.findById(vehicleDTO.getParkingSpace().getSpaceId())
                 .orElseThrow(NotFoundVacancyException::new);
-
         //checar se vaga tá ocupada
         if (parkingSpace.isOccupied()) {
             // Checar se vaga tá ocupada

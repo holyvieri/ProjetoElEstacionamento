@@ -1,10 +1,9 @@
 package com.upe.ProjetoElEstacionamento.DTOs;
 
 import com.upe.ProjetoElEstacionamento.model.VehicleTypes;
-import jakarta.persistence.Column;
 
 public class ParkingSpaceDTO {
-    private Long id;
+    private Long spaceId;
     private boolean occupied;
 
     private boolean preferential;
@@ -13,12 +12,12 @@ public class ParkingSpaceDTO {
 
     private String date;
 
-    public Long getId() {
-        return id;
+    public Long getSpaceId() {
+        return spaceId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setSpaceId(Long spaceId) {
+        this.spaceId = spaceId;
     }
 
     public boolean isOccupied() {
