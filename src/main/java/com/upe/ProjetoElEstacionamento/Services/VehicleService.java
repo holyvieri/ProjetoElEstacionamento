@@ -24,13 +24,13 @@ public class VehicleService {
         }
 
         // Cria um novo veículo com base nos dados do DTO
-        Vehicle newVehicle = new Vehicle(vehicleDTO.getOwnerName(), vehicleDTO.getLicensePlate(), vehicleDTO.getPreferential(), vehicleDTO.getVehicleType(), vehicleDTO.getParkingSpace());
+        Vehicle newVehicle = new Vehicle(vehicleDTO.getOwnerName(), vehicleDTO.getLicensePlate(),
+                vehicleDTO.getPreferential(), vehicleDTO.getVehicleType(), vehicleDTO.getParkingSpace());
         newVehicle.setParkingSpace(parkingSpace);
         parkingSpace.setOccupied(true);
         parkingSpaceRepository.save(parkingSpace);
 
         return vehicleRepository.save(newVehicle);
-
 
     }
     public void removeVehicleFromSpace(Long vehicleId) {
