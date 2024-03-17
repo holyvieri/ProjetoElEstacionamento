@@ -4,9 +4,7 @@ import com.upe.ProjetoElEstacionamento.Repositories.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.upe.ProjetoElEstacionamento.Repositories.ParkingSpaceRepository;
-import com.upe.ProjetoElEstacionamento.Repositories.VehicleRepository;
 import com.upe.ProjetoElEstacionamento.model.ParkingSpace;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;

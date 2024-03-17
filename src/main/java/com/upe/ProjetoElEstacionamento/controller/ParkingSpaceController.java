@@ -1,6 +1,6 @@
 package com.upe.ProjetoElEstacionamento.controller;
 
-import com.upe.ProjetoElEstacionamento.repositories.ParkingSpaceRepository;
+import com.upe.ProjetoElEstacionamento.Repositories.ParkingSpaceRepository;
 import com.upe.ProjetoElEstacionamento.model.ParkingSpace;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

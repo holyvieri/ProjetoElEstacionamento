@@ -1,11 +1,11 @@
-package com.upe.ProjetoElEstacionamento.services;
+package com.upe.ProjetoElEstacionamento.Services;
 
 import com.upe.ProjetoElEstacionamento.DTOs.VehicleDTO;
 import com.upe.ProjetoElEstacionamento.exceptions.IncompatibleTypesException;
 import com.upe.ProjetoElEstacionamento.exceptions.NotFoundVacancyException;
 import com.upe.ProjetoElEstacionamento.exceptions.NotFoundVehicleException;
 import com.upe.ProjetoElEstacionamento.exceptions.VacancyOccupiedException;
-import com.upe.ProjetoElEstacionamento.repositories.*;
+import com.upe.ProjetoElEstacionamento.Repositories.*;
 import com.upe.ProjetoElEstacionamento.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ public class VehicleService {
     // Lógica para criar um novo veículo e associar à vaga correta
     public Vehicle createVehicle(VehicleDTO vehicleDTO) {
         // Achar id da vaga e checar se ela existe
-        ParkingSpace parkingSpace = parkingSpaceRepository.findById(vehicleDTO.getParkingSpace().getId())
+        ParkingSpace parkingSpace = parkingSpaceRepository.findById(vehicleDTO.getParkingSpace().getSpaceId())
                 .orElseThrow(NotFoundVacancyException::new);
 
         if (parkingSpace.isOccupied()) {
@@ -44,7 +44,7 @@ public class VehicleService {
             return vehicleRepository.save(newVehicle);
         }
     }
-    // Lógica para remove um veículo do banco de dados
+    // Lógica para remover um veículo do banco de dados
     public void removeVehicleFromSpace(Long vehicleId) {
         Vehicle vehicle = vehicleRepository.findById(vehicleId)
                 .orElseThrow(NotFoundVehicleException::new);

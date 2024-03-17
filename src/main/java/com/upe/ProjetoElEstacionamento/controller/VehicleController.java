@@ -1,14 +1,13 @@
 package com.upe.ProjetoElEstacionamento.controller;
 
 import com.upe.ProjetoElEstacionamento.DTOs.VehicleDTO;
+import com.upe.ProjetoElEstacionamento.Services.ParkingSpaceService;
+import com.upe.ProjetoElEstacionamento.model.Vehicle;
 import com.upe.ProjetoElEstacionamento.Repositories.ParkingSpaceRepository;
 import com.upe.ProjetoElEstacionamento.Repositories.VehicleRepository;
-import com.upe.ProjetoElEstacionamento.Services.ParkingSpaceService;
 import com.upe.ProjetoElEstacionamento.Services.VehicleService;
-import com.upe.ProjetoElEstacionamento.model.ParkingSpace;
-import com.upe.ProjetoElEstacionamento.model.Vehicle;
-import com.upe.ProjetoElEstacionamento.model.VehicleTypes;
 import org.springframework.http.HttpStatus;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,7 +41,6 @@ public class VehicleController {
             return ResponseEntity.notFound().build();
         }
     }
-
 
     //POST
     //vai receber JSON do front - DTO
