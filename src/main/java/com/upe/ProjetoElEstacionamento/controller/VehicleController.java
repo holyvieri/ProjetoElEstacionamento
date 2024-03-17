@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/estacionamento/registro")
+@RequestMapping("/estacionamento/veiculo")
 public class VehicleController {
     private VehicleRepository vehicleRepository;
     private ParkingSpaceRepository parkingSpaceRepository;
@@ -44,7 +44,7 @@ public class VehicleController {
 
     //POST
     //vai receber JSON do front - DTO
-    @PostMapping("/criar")
+    @PostMapping("/create")
     public ResponseEntity<Vehicle> createVehicle(@RequestBody VehicleDTO vehicleDTO) {
         Vehicle newVehicle = vehicleService.createVehicle(vehicleDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(newVehicle);
