@@ -5,9 +5,10 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "parking_spaces")
 public class ParkingSpace {
+    // Atributos
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long spaceId;
+    private Long id;
 
     @Column(name = "occupied")
     private boolean occupied;
@@ -28,11 +29,10 @@ public class ParkingSpace {
     @Column(name = "date")
     private String date;
 
-    public ParkingSpace(){}
-
-    public ParkingSpace(Long spaceId, boolean occupied, boolean spacePreferential,
+    // Construtor
+    public ParkingSpace(Long id, boolean occupied, boolean spacePreferential,
                         Double baseRate, Double hourly_rate, VehicleTypes spaceType, String date) {
-        this.spaceId = spaceId;
+        this.id = id;
         this.occupied = occupied;
         this.spacePreferential = spacePreferential;
         this.baseRate = baseRate;
@@ -41,12 +41,15 @@ public class ParkingSpace {
         this.date = date.substring(16,18);
     }
 
-    public Long getSpaceId() {
-        return spaceId;
+    public ParkingSpace(){}
+
+    // Getters e Setters
+    public Long getId() {
+        return id;
     }
 
-    public void setSpaceId(Long spaceId) {
-        this.spaceId = spaceId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public boolean isOccupied() {

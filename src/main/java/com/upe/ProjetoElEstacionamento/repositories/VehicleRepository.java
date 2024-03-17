@@ -1,4 +1,4 @@
-package com.upe.ProjetoElEstacionamento.Repositories;
+package com.upe.ProjetoElEstacionamento.repositories;
 
 
 import com.upe.ProjetoElEstacionamento.model.Vehicle;

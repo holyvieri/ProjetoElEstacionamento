@@ -1,12 +1,10 @@
 package com.upe.ProjetoElEstacionamento.controller;
 
 import com.upe.ProjetoElEstacionamento.DTOs.VehicleDTO;
-import com.upe.ProjetoElEstacionamento.Repositories.ParkingSpaceRepository;
-import com.upe.ProjetoElEstacionamento.Repositories.VehicleRepository;
-import com.upe.ProjetoElEstacionamento.Services.VehicleService;
-import com.upe.ProjetoElEstacionamento.model.ParkingSpace;
+import com.upe.ProjetoElEstacionamento.repositories.ParkingSpaceRepository;
+import com.upe.ProjetoElEstacionamento.repositories.VehicleRepository;
+import com.upe.ProjetoElEstacionamento.services.VehicleService;
 import com.upe.ProjetoElEstacionamento.model.Vehicle;
-import com.upe.ProjetoElEstacionamento.model.VehicleTypes;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +22,7 @@ public class VehicleController {
         this.vehicleService = vehicleService;
     }
 
-    //GET
+    //GETs - O primeira retorna todos e o segundo retorna apenas um objeto pelo Id
     @GetMapping  //esse tá pegando
     public ResponseEntity<List<Vehicle>> getAll() {
         List<Vehicle> veiculos = vehicleRepository.findAll();
@@ -41,9 +39,7 @@ public class VehicleController {
         }
     }
 
-
-    //POST
-    //vai receber JSON do front - DTO
+    //POST - vai receber um JSON do front para criar um objeto Vehicle
     @CrossOrigin
     @PostMapping("/create")
     public ResponseEntity<Vehicle> createVehicle(@RequestBody VehicleDTO vehicleDTO) {
@@ -51,9 +47,11 @@ public class VehicleController {
         return ResponseEntity.status(HttpStatus.CREATED).body(newVehicle);
 
     }
+
+    // DELETE - vai deletar o objeto pelo Id
     @DeleteMapping("/deletar")
     public ResponseEntity<Void> deleteVehicle(@RequestBody VehicleDTO vehicleDTO){
-        vehicleService.removeVehicleFromSpace(vehicleDTO.getParkingSpace().getSpaceId());
+        vehicleService.removeVehicleFromSpace(vehicleDTO.getParkingSpace().getId());
         return ResponseEntity.ok().build();
     }
 }

@@ -2,12 +2,10 @@ package com.upe.ProjetoElEstacionamento.model;
 
 import jakarta.persistence.*;
 
-import javax.xml.crypto.Data;
-
 @Entity
 @Table(name = "vehicles")
 public class Vehicle {
-
+    // Atributos
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -30,6 +28,7 @@ public class Vehicle {
     @JoinColumn(name = "parking_space")
     private ParkingSpace parkingSpace;
 
+    // Construtores
     public Vehicle(String ownerName, String licensePlate, Boolean vehiclePreferential, VehicleTypes vehicleType,ParkingSpace parkingSpace) {
         this.ownerName = ownerName;
         this.licensePlate = licensePlate;
@@ -41,7 +40,6 @@ public class Vehicle {
     public Vehicle() {}
 
     // Getters and Setters
-
     public Long getId() {
         return id;
     }
@@ -73,7 +71,6 @@ public class Vehicle {
     public void setPreferential(Boolean vehiclePreferential) {
         this.vehiclePreferential = vehiclePreferential;
     }
-
 
     public ParkingSpace getParkingSpace() {
         return parkingSpace;
