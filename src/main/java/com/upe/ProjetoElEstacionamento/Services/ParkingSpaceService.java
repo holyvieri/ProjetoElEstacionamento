@@ -25,6 +25,34 @@ public class ParkingSpaceService {
                 .orElse(null);
     }
 
+    public Double payment(Long spaceId){
+        ParkingSpace space = parkingSpaceRepository.findById(spaceId)
+                .orElseThrow(() -> new RuntimeException("Vaga não encontrada com o ID especificado."));
+        if (!space.isSpacePreferential()) {
+            if (space.getSpaceType().equals("MOTORCYCLE")) {
+                space.setBaseRate(6.5);
+                space.setBaseRate(2.0);
+            } else if (space.getSpaceType().equals("BIKE")) {
+                space.setBaseRate(1.0);
+                space.setHourly_rate(0.25);
+            } else if (space.getSpaceType().equals("CAR")) {
+                space.setBaseRate(11.5);
+                space.setHourly_rate(1.0);
+            } else if (space.getSpaceType().equals("BUS")) {
+                space.setBaseRate(5.0);
+                space.setHourly_rate(0.5);
+            }
+            long time = space.getTimeGoneBy()/60;
+            if(time > 1){
+                return (space.getBaseRate()+(space.getHourly_rate()*(time-1)));
+            }else{
+                return space.getBaseRate();
+            }
+        }else{
+            return 0.0;
+        }
+    }
+
     public ParkingSpace startTiming(Long spaceId) {
         ParkingSpace space = parkingSpaceRepository.findById(spaceId)
                 .orElseThrow(() -> new RuntimeException("Vaga não encontrada com o ID especificado."));
