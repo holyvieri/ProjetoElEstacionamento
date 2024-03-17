@@ -60,6 +60,7 @@ public class VehicleService {
         ParkingSpace parkingSpace = vehicle.getParkingSpace();
         if (parkingSpace != null) {
             parkingSpace.setOccupied(false);
+            parkingSpace.setVehicleId(null);
             parkingSpace.setExitTime(LocalDateTime.now()); //tempo saida
             parkingSpaceRepository.save(parkingSpace);
         }
