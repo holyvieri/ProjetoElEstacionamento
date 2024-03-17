@@ -55,7 +55,7 @@ public class ParkingSpaceService {
 
     public void startTiming(Long spaceId) {
         ParkingSpace space = parkingSpaceRepository.findById(spaceId)
-                .orElseThrow(() -> new RuntimeException("Vaga não encontrada com o ID especificado."));
+                .orElseThrow(() -> new RuntimeException("Não há como iniciar a contagem do tempo, pois a vaga não foi encontrada com o ID especificado."));
 
         space.setEnterTime(LocalDateTime.now());
         parkingSpaceRepository.save(space);
@@ -64,7 +64,7 @@ public class ParkingSpaceService {
 
     public void endTiming(Long spaceId) {
         ParkingSpace space = parkingSpaceRepository.findById(spaceId)
-                .orElseThrow(() -> new RuntimeException("Estacionamento não encontrado"));
+                .orElseThrow(() -> new RuntimeException("Não há como finalizar a contagem do tempo, pois a vaga não foi encontrada com o ID especificado."));
 
         space.setExitTime(LocalDateTime.now());
         parkingSpaceRepository.save(space);
