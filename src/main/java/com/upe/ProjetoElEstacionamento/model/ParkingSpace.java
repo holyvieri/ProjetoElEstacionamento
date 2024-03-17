@@ -29,14 +29,7 @@ public class ParkingSpace {
     @Column(name = "space_type")
     private VehicleTypes spaceType;
 
-    @Column(name = "entrada")
-    private LocalDateTime enterTime;
 
-    @Column(name = "saida")
-    private LocalDateTime exitTime;
-
-    @Column(name = "tempo_em_andamento")
-    private Long timeGoneBy; // em segundos
 
     public ParkingSpace(){}
 
@@ -99,34 +92,5 @@ public class ParkingSpace {
         this.spaceType = spaceType;
     }
 
-    public LocalDateTime getEnterTime() {
-        return enterTime;
-    }
-
-    public void setEnterTime(LocalDateTime enterTime) {
-        this.enterTime = enterTime;
-    }
-
-    public LocalDateTime getExitTime() {
-        return exitTime;
-    }
-
-    public void setExitTime(LocalDateTime exitTime) {
-        this.exitTime = exitTime;
-    }
-
-    public Long getTimeGoneBy() {
-        if (enterTime == null || exitTime == null) {
-            throw new RuntimeException("Entrada ou saída não registrada.");
-        }
-        Duration duration = Duration.between(enterTime, exitTime);
-        timeGoneBy = duration.getSeconds();
-        return timeGoneBy; // Retorna o tempo decorrido em segundos
-    }
-
-
-    public void setTimeGoneBy(Long timeGoneBy) {
-        this.timeGoneBy = timeGoneBy;
-    }
 
 }

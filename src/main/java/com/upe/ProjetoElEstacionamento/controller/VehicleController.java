@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -48,15 +50,13 @@ public class VehicleController {
     @PostMapping("/create") //estacionar
     public ResponseEntity<Vehicle> createVehicle(@RequestBody VehicleDTO vehicleDTO) {
         Vehicle newVehicle = vehicleService.createVehicle(vehicleDTO);
-        parkingSpaceService.startTiming(newVehicle.getParkingSpace().getSpaceId()); //começar a contar tempo em segundos
-
         return ResponseEntity.status(HttpStatus.CREATED).body(newVehicle);
     }
     @DeleteMapping("/deletar/{id}")
     public ResponseEntity<Void> deleteVehicle(@PathVariable Long id){
         Vehicle vehicle = vehicleRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Veículo não encontrado."));
-        parkingSpaceService.endTiming(vehicle.getParkingSpace().getSpaceId());
+
         vehicleService.removeVehicleFromSpace(id);
         return ResponseEntity.ok().build();
     }

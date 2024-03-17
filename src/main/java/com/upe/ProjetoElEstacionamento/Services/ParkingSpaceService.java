@@ -24,7 +24,7 @@ public class ParkingSpaceService {
                 .orElse(null);
     }
 
-    public Double payment(Long spaceId){
+    /*public Double payment(Long spaceId){
         ParkingSpace space = parkingSpaceRepository.findById(spaceId)
                 .orElseThrow(() -> new RuntimeException("Não há como fazer o pagamento, pois a vaga não foi encontrada com o ID especificado."));
         if (!space.isSpacePreferential()) {
@@ -50,26 +50,6 @@ public class ParkingSpaceService {
         }else{
             return 0.0;
         }
-    }
-
-    public void startTiming(Long spaceId) {
-        ParkingSpace space = parkingSpaceRepository.findById(spaceId)
-                .orElseThrow(() -> new RuntimeException("Não há como iniciar a contagem do tempo, pois a vaga não foi encontrada com o ID especificado."));
-
-        space.setEnterTime(LocalDateTime.now());
-        parkingSpaceRepository.save(space);
-
-    }
-
-    public void endTiming(Long spaceId) {
-        ParkingSpace space = parkingSpaceRepository.findById(spaceId)
-                .orElseThrow(() -> new RuntimeException("Não há como finalizar a contagem do tempo, pois a vaga não foi encontrada com o ID especificado."));
-
-        space.setExitTime(LocalDateTime.now());
-        parkingSpaceRepository.save(space);
-    }
-
-
-
+    }*/
 
 }
