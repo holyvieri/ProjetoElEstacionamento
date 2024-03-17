@@ -14,6 +14,7 @@ public class VehicleService {
     @Autowired
     private ParkingSpaceRepository parkingSpaceRepository;
 
+    //ok
     public Vehicle createVehicle(VehicleDTO vehicleDTO) {
         // Lógica para criar um novo veículo e associar à vaga correta
         //achar id da vaga e checar se ela existe
@@ -26,7 +27,7 @@ public class VehicleService {
         } else {
             // Cria um novo veículo com base nos dados do DTO
             Vehicle newVehicle = new Vehicle(vehicleDTO.getOwnerName(), vehicleDTO.getLicensePlate(),
-                    vehicleDTO.getPreferential(), vehicleDTO.getVehicleTypeEnum(), vehicleDTO.getParkingSpace());
+                    vehicleDTO.getPreferential(), vehicleDTO.getVehicleType(), vehicleDTO.getParkingSpace());
             newVehicle.setParkingSpace(parkingSpace);
             parkingSpace.setOccupied(true);
             parkingSpaceRepository.save(parkingSpace);

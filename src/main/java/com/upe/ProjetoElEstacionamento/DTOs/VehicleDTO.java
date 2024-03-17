@@ -7,7 +7,7 @@ public class VehicleDTO {
     private String ownerName;
     private String licensePlate;
     private Boolean preferential;
-    private String vehicleType;
+    private VehicleTypes vehicleType;
     private ParkingSpace parkingSpace;
 
     public String getOwnerName() {
@@ -34,11 +34,11 @@ public class VehicleDTO {
         this.preferential = preferential;
     }
 
-    public String getVehicleType() {
+    public VehicleTypes getVehicleType() {
         return vehicleType;
     }
 
-    public void setVehicleType(String vehicleType) {
+    public void setVehicleType(VehicleTypes vehicleType) {
         this.vehicleType = vehicleType;
     }
 
@@ -49,9 +49,6 @@ public class VehicleDTO {
     public void setParkingSpace(ParkingSpace parkingSpace) {
         this.parkingSpace = parkingSpace;
     }
-    public VehicleTypes getVehicleTypeEnum() {
-        // Converte a string para enum
-        return VehicleTypes.valueOf(vehicleType.toUpperCase()); // Supondo que a string recebida seja "CAR", "BIKE", "BUS" ou "MOTORCYCLE"
-    }
+
 
 }
