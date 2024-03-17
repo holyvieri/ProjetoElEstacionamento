@@ -23,7 +23,7 @@ public class ParkingSpace {
     private Double baseRate;
 
     @Column(name = "hourly_rate")
-    private Double hourly_rate;
+    private Double hourlyRate;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "space_type")
@@ -36,17 +36,17 @@ public class ParkingSpace {
     private LocalDateTime exitTime;
 
     @Column(name = "tempo_em_andamento")
-    private long timeGoneBy; // em segundos
+    private Long timeGoneBy; // em segundos
 
     public ParkingSpace(){}
 
     public ParkingSpace(Long spaceId, boolean occupied, boolean spacePreferential,
-                        Double baseRate, Double hourly_rate, VehicleTypes spaceType) {
+                        Double baseRate, Double hourlyRate, VehicleTypes spaceType) {
         this.spaceId = spaceId;
         this.occupied = occupied;
         this.spacePreferential = spacePreferential;
         this.baseRate = baseRate;
-        this.hourly_rate = hourly_rate;
+        this.hourlyRate = hourlyRate;
         this.spaceType = spaceType;
 
     }
@@ -83,12 +83,12 @@ public class ParkingSpace {
         this.baseRate = baseRate;
     }
 
-    public Double getHourly_rate() {
-        return hourly_rate;
+    public Double getHourlyRate() {
+        return hourlyRate;
     }
 
-    public void setHourly_rate(Double hourly_rate) {
-        this.hourly_rate = hourly_rate;
+    public void setHourlyRate(Double hourly_rate) {
+        this.hourlyRate = hourly_rate;
     }
 
     public VehicleTypes getSpaceType() {
@@ -115,7 +115,7 @@ public class ParkingSpace {
         this.exitTime = exitTime;
     }
 
-    public long getTimeGoneBy() {
+    public Long getTimeGoneBy() {
         if (enterTime == null || exitTime == null) {
             throw new RuntimeException("Entrada ou saída não registrada.");
         }
@@ -125,7 +125,7 @@ public class ParkingSpace {
     }
 
 
-    public void setTimeGoneBy(long timeGoneBy) {
+    public void setTimeGoneBy(Long timeGoneBy) {
         this.timeGoneBy = timeGoneBy;
     }
 

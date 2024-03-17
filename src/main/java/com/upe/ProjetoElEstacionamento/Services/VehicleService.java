@@ -24,6 +24,7 @@ public class VehicleService {
         ParkingSpace parkingSpace = parkingSpaceRepository.findById(vehicleDTO.getParkingSpace().getSpaceId())
                 .orElseThrow(NotFoundVacancyException::new);
 
+        //checar se vaga tá ocupada
         if (parkingSpace.isOccupied()) {
             // Checar se vaga tá ocupada
             throw new VacancyOccupiedException();
@@ -44,10 +45,9 @@ public class VehicleService {
             return vehicleRepository.save(newVehicle);
         }
     }
-    // Lógica para remover um veículo do banco de dados
     public void removeVehicleFromSpace(Long vehicleId) {
         Vehicle vehicle = vehicleRepository.findById(vehicleId)
-                .orElseThrow(NotFoundVehicleException::new);
+                .orElseThrow(() -> new RuntimeException("Veículo não encontrado."));
 
         ParkingSpace parkingSpace = vehicle.getParkingSpace();
         if (parkingSpace != null) {

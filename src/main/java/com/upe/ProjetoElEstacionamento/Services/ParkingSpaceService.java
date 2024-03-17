@@ -1,6 +1,7 @@
 package com.upe.ProjetoElEstacionamento.Services;
 
 import com.upe.ProjetoElEstacionamento.Repositories.VehicleRepository;
+import com.upe.ProjetoElEstacionamento.model.VehicleTypes;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.upe.ProjetoElEstacionamento.Repositories.ParkingSpaceRepository;
@@ -25,24 +26,24 @@ public class ParkingSpaceService {
 
     public Double payment(Long spaceId){
         ParkingSpace space = parkingSpaceRepository.findById(spaceId)
-                .orElseThrow(() -> new RuntimeException("Vaga não encontrada com o ID especificado."));
+                .orElseThrow(() -> new RuntimeException("Não há como fazer o pagamento, pois a vaga não foi encontrada com o ID especificado."));
         if (!space.isSpacePreferential()) {
-            if (space.getSpaceType().equals("MOTORCYCLE")) {
+            if (space.getSpaceType().equals(VehicleTypes.MOTORCYCLE)) {
                 space.setBaseRate(6.5);
                 space.setBaseRate(2.0);
-            } else if (space.getSpaceType().equals("BIKE")) {
+            } else if (space.getSpaceType().equals(VehicleTypes.BIKE)) {
                 space.setBaseRate(1.0);
-                space.setHourly_rate(0.25);
-            } else if (space.getSpaceType().equals("CAR")) {
+                space.setHourlyRate(0.25);
+            } else if (space.getSpaceType().equals(VehicleTypes.CAR)) {
                 space.setBaseRate(11.5);
-                space.setHourly_rate(1.0);
-            } else if (space.getSpaceType().equals("BUS")) {
+                space.setHourlyRate(1.0);
+            } else if (space.getSpaceType().equals(VehicleTypes.BUS)) {
                 space.setBaseRate(5.0);
-                space.setHourly_rate(0.5);
+                space.setHourlyRate(0.5);
             }
             long time = space.getTimeGoneBy()/60;
             if(time > 1){
-                return (space.getBaseRate()+(space.getHourly_rate()*(time-1)));
+                return (space.getBaseRate()+(space.getHourlyRate()*(time-1)));
             }else{
                 return space.getBaseRate();
             }
@@ -51,24 +52,21 @@ public class ParkingSpaceService {
         }
     }
 
-    public ParkingSpace startTiming(Long spaceId) {
+    public void startTiming(Long spaceId) {
         ParkingSpace space = parkingSpaceRepository.findById(spaceId)
-                .orElseThrow(() -> new RuntimeException("Vaga não encontrada com o ID especificado."));
+                .orElseThrow(() -> new RuntimeException("Não há como iniciar a contagem do tempo, pois a vaga não foi encontrada com o ID especificado."));
 
         space.setEnterTime(LocalDateTime.now());
         parkingSpaceRepository.save(space);
 
-        return space;
     }
 
-    public ParkingSpace endTiming(Long spaceId) {
+    public void endTiming(Long spaceId) {
         ParkingSpace space = parkingSpaceRepository.findById(spaceId)
-                .orElseThrow(() -> new RuntimeException("Estacionamento não encontrado"));
+                .orElseThrow(() -> new RuntimeException("Não há como finalizar a contagem do tempo, pois a vaga não foi encontrada com o ID especificado."));
 
         space.setExitTime(LocalDateTime.now());
         parkingSpaceRepository.save(space);
-
-        return space;
     }
 
 
