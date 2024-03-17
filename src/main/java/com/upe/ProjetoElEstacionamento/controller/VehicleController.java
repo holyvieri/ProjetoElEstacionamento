@@ -44,6 +44,7 @@ public class VehicleController {
 
     //POST
     //vai receber JSON do front - DTO
+    @CrossOrigin
     @PostMapping("/create")
     public ResponseEntity<Vehicle> createVehicle(@RequestBody VehicleDTO vehicleDTO) {
         Vehicle newVehicle = vehicleService.createVehicle(vehicleDTO);
