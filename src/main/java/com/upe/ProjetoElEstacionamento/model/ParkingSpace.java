@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 public class ParkingSpace {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long spaceId;
 
     @Column(name = "occupied")

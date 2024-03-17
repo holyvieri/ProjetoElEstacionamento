@@ -24,17 +24,17 @@ public class ParkingSpaceService {
                 .orElse(null);
     }
 
-    public ParkingSpace payment(VehicleTypes spaceType){
-        if (spaceType.equals(VehicleTypes.BIKE)){
-
-        }else if (spaceType.equals(VehicleTypes.BUS)) {
-
-        } else if (spaceType.equals(VehicleTypes.CAR)) {
-
-        } else if (spaceType.equals(VehicleTypes.MOTORCYCLE)) {
-            
-        }
-    }
+//    public ParkingSpace payment(VehicleTypes spaceType){
+//        if (spaceType.equals(VehicleTypes.BIKE)){
+//
+//        }else if (spaceType.equals(VehicleTypes.BUS)) {
+//
+//        } else if (spaceType.equals(VehicleTypes.CAR)) {
+//
+//        } else if (spaceType.equals(VehicleTypes.MOTORCYCLE)) {
+//
+//        }
+//    }
 
 
 
