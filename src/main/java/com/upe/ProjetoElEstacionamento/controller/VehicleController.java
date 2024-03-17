@@ -1,16 +1,18 @@
 package com.upe.ProjetoElEstacionamento.controller;
 
 import com.upe.ProjetoElEstacionamento.DTOs.VehicleDTO;
+import com.upe.ProjetoElEstacionamento.Services.ParkingSpaceService;
+import com.upe.ProjetoElEstacionamento.model.Vehicle;
 import com.upe.ProjetoElEstacionamento.Repositories.ParkingSpaceRepository;
 import com.upe.ProjetoElEstacionamento.Repositories.VehicleRepository;
 import com.upe.ProjetoElEstacionamento.Services.VehicleService;
-import com.upe.ProjetoElEstacionamento.model.ParkingSpace;
-import com.upe.ProjetoElEstacionamento.model.Vehicle;
-import com.upe.ProjetoElEstacionamento.model.VehicleTypes;
 import org.springframework.http.HttpStatus;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -19,6 +21,7 @@ public class VehicleController {
     private VehicleRepository vehicleRepository;
     private ParkingSpaceRepository parkingSpaceRepository;
     private VehicleService vehicleService;
+    private ParkingSpaceService parkingSpaceService;
     public VehicleController(VehicleRepository vehicleRepository, VehicleService vehicleService) {
         this.vehicleRepository = vehicleRepository;
         this.vehicleService = vehicleService;
@@ -41,19 +44,20 @@ public class VehicleController {
         }
     }
 
-
     //POST
     //vai receber JSON do front - DTO
     @CrossOrigin
-    @PostMapping("/create")
+    @PostMapping("/create") //estacionar
     public ResponseEntity<Vehicle> createVehicle(@RequestBody VehicleDTO vehicleDTO) {
         Vehicle newVehicle = vehicleService.createVehicle(vehicleDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(newVehicle);
-
     }
-    @DeleteMapping("/deletar")
-    public ResponseEntity<Void> deleteVehicle(@RequestBody VehicleDTO vehicleDTO){
-        vehicleService.removeVehicleFromSpace(vehicleDTO.getParkingSpace().getSpaceId());
+    @DeleteMapping("/deletar/{id}")
+    public ResponseEntity<Void> deleteVehicle(@PathVariable Long id){
+        Vehicle vehicle = vehicleRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Veículo não encontrado."));
+
+        vehicleService.removeVehicleFromSpace(id);
         return ResponseEntity.ok().build();
     }
 }

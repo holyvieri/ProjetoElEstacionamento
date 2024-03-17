@@ -2,6 +2,9 @@ package com.upe.ProjetoElEstacionamento.model;
 
 import jakarta.persistence.*;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "parking_spaces")
 public class ParkingSpace {
@@ -20,26 +23,42 @@ public class ParkingSpace {
     private Double baseRate;
 
     @Column(name = "hourly_rate")
-    private Double hourly_rate;
+    private Double hourlyRate;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "space_type")
     private VehicleTypes spaceType;
 
-    @Column(name = "date")
-    private String date;
+    @Column(name = "enter_time")
+    LocalDateTime enterTime;
+
+    @Column(name = "exit_time")
+    LocalDateTime exitTime;
+
+    public LocalDateTime getExitTime() {
+        return exitTime;
+    }
+
+    public void setExitTime(LocalDateTime exitTime) {
+        this.exitTime = exitTime;
+    }
+
+    public LocalDateTime getEnterTime() {
+        return enterTime;
+    }
+
+    public void setEnterTime(LocalDateTime enterTime) {
+        this.enterTime = enterTime;
+    }
 
     public ParkingSpace(){}
 
-    public ParkingSpace(Long spaceId, boolean occupied, boolean spacePreferential,
-                        Double baseRate, Double hourly_rate, VehicleTypes spaceType, String date) {
+    public ParkingSpace(Long spaceId, boolean occupied, boolean spacePreferential, VehicleTypes spaceType) {
         this.spaceId = spaceId;
         this.occupied = occupied;
         this.spacePreferential = spacePreferential;
-        this.baseRate = baseRate;
-        this.hourly_rate = hourly_rate;
         this.spaceType = spaceType;
-        this.date = date.substring(16,18);
+
     }
 
     public Long getSpaceId() {
@@ -74,12 +93,12 @@ public class ParkingSpace {
         this.baseRate = baseRate;
     }
 
-    public Double getHourly_rate() {
-        return hourly_rate;
+    public Double getHourlyRate() {
+        return hourlyRate;
     }
 
-    public void setHourly_rate(Double hourly_rate) {
-        this.hourly_rate = hourly_rate;
+    public void setHourlyRate(Double hourly_rate) {
+        this.hourlyRate = hourly_rate;
     }
 
     public VehicleTypes getSpaceType() {
@@ -90,11 +109,5 @@ public class ParkingSpace {
         this.spaceType = spaceType;
     }
 
-    public String getDate() {
-        return date;
-    }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
 }

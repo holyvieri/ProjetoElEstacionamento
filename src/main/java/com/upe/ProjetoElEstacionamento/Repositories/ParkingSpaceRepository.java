@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ParkingSpaceRepository extends JpaRepository<ParkingSpace, Long> {
-    @Query("SELECT ps FROM ParkingSpace ps WHERE ps.spaceType = :type AND ps.occupied = false")
-    ParkingSpace findAvailableSpaceByType(@Param("type") String type);
+
 }
+
