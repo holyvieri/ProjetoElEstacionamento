@@ -17,15 +17,17 @@ public class VehicleService {
     //ok
     public Vehicle createVehicle(VehicleDTO vehicleDTO) {
         // Lógica para criar um novo veículo e associar à vaga correta
-        //achar id da vaga e checar se ela existe
+        // achar id da vaga e checar se ela existe
         ParkingSpace parkingSpace = parkingSpaceRepository.findById(vehicleDTO.getParkingSpace().getSpaceId())
                 .orElseThrow(() -> new RuntimeException("Vaga não encontrada com o ID especificado."));
 
         //checar se vaga tá ocupada
         if (parkingSpace.isOccupied()) {
             throw new RuntimeException("A vaga escolhida já está ocupada.");
+        } else if (parkingSpace.getSpaceType() != vehicleDTO.getVehicleType()) {
+            throw new RuntimeException("A tipo de vaga deve ser compatível com o veículo");
         } else {
-            // Cria um novo veículo com base nos dados do DTO
+            // Cria um novo veículo com base nos dados do DTO-
             Vehicle newVehicle = new Vehicle(vehicleDTO.getOwnerName(), vehicleDTO.getLicensePlate(),
                     vehicleDTO.getPreferential(), vehicleDTO.getVehicleType(), vehicleDTO.getParkingSpace());
             newVehicle.setParkingSpace(parkingSpace);
@@ -34,8 +36,6 @@ public class VehicleService {
 
             return vehicleRepository.save(newVehicle);
         }
-
-        //criar lógica de tipo veículo e vaga
     }
     public void removeVehicleFromSpace(Long vehicleId) {
         Vehicle vehicle = vehicleRepository.findById(vehicleId)
