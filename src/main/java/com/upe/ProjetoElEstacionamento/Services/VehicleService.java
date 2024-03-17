@@ -53,7 +53,7 @@ public class VehicleService {
     }
     public void removeVehicleFromSpace(Long vehicleId) {
         Vehicle vehicle = vehicleRepository.findById(vehicleId)
-                .orElseThrow(() -> new RuntimeException("Veículo não encontrado."));
+                .orElseThrow(() -> new RuntimeException("Não há como remover o veículo da vaga, pois o id do veículo especificado não foi encontrado."));
         ParkingSpace parkingSpace = vehicle.getParkingSpace();
         if (parkingSpace != null) {
             parkingSpace.setOccupied(false);
