@@ -25,39 +25,26 @@ public class ParkingSpaceService {
                 .orElse(null);
     }
 
-    public ParkingSpace startTiming() {
-        ParkingSpace space = new ParkingSpace();
+    public ParkingSpace startTiming(Long spaceId) {
+        ParkingSpace space = parkingSpaceRepository.findById(spaceId)
+                .orElseThrow(() -> new RuntimeException("Vaga não encontrada com o ID especificado."));
+
         space.setEnterTime(LocalDateTime.now());
-        space.setOccupied(true);
         parkingSpaceRepository.save(space);
 
-        // Atualiza a vaga de estacionamento para ocupado
-        ParkingSpace parkingSpace = parkingSpaceRepository.findFirstUnoccupied();
-        if (parkingSpace != null) {
-            parkingSpace.setOcupado(true);
-            parkingSpaceRepository.save(parkingSpace);
-        }
-
-        return estacionamento;
+        return space;
     }
 
-    public Estacionamento finalizarEstacionamento(Long id) {
-        Estacionamento estacionamento = estacionamentoRepository.findById(id)
+    public ParkingSpace endTiming(Long spaceId) {
+        ParkingSpace space = parkingSpaceRepository.findById(spaceId)
                 .orElseThrow(() -> new RuntimeException("Estacionamento não encontrado"));
 
-        estacionamento.setSaida(LocalDateTime.now());
-        estacionamento.setEmAndamento(false);
-        estacionamentoRepository.save(estacionamento);
+        space.setExitTime(LocalDateTime.now());
+        parkingSpaceRepository.save(space);
 
-        // Atualiza a vaga de estacionamento para livre
-        ParkingSpace parkingSpace = parkingSpaceRepository.findFirstByOcupadoTrue();
-        if (parkingSpace != null) {
-            parkingSpace.setOcupado(false);
-            parkingSpaceRepository.save(parkingSpace);
-        }
-
-        return estacionamento;
+        return space;
     }
+
 
 
 

@@ -2,6 +2,7 @@ package com.upe.ProjetoElEstacionamento.model;
 
 import jakarta.persistence.*;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 @Entity
@@ -115,10 +116,17 @@ public class ParkingSpace {
     }
 
     public long getTimeGoneBy() {
-        return timeGoneBy;
+        if (enterTime == null || exitTime == null) {
+            throw new RuntimeException("Entrada ou saída não registrada.");
+        }
+        Duration duration = Duration.between(enterTime, exitTime);
+        timeGoneBy = duration.getSeconds();
+        return timeGoneBy; // Retorna o tempo decorrido em segundos
     }
+
 
     public void setTimeGoneBy(long timeGoneBy) {
         this.timeGoneBy = timeGoneBy;
     }
+
 }
