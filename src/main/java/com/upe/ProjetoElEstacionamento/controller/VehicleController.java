@@ -14,22 +14,23 @@ import java.util.List;
 @RestController
 @RequestMapping("/estacionamento/registro")
 public class VehicleController {
-    private VehicleRepository repository;
+    private VehicleRepository vehicleRepository;
     private ParkingSpaceRepository parkingSpaceRepository;
     private VehicleService vehicleService;
-    public VehicleController(VehicleRepository repository) {
-        this.repository = repository;
+    public VehicleController(VehicleRepository vehicleRepository) {
+        this.vehicleRepository = vehicleRepository;
     }
 
     //GET
-    @GetMapping
+    @GetMapping  //esse tá pegando
     public ResponseEntity<List<Vehicle>> getAll() {
-        List<Vehicle> veiculos = repository.findAll();
+        List<Vehicle> veiculos = vehicleRepository.findAll();
         return ResponseEntity.ok(veiculos);
     }
     @GetMapping("/{id}")
     public ResponseEntity<Vehicle> getVehicleById(@PathVariable Long id) {
-        Vehicle vehicle = vehicleService.findVehicleById(id);
+        Vehicle vehicle = vehicleRepository.findById(id)
+                .orElse(null);
         if (vehicle != null) {
             return ResponseEntity.ok(vehicle);
         } else {
