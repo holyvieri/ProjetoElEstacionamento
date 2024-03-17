@@ -36,7 +36,7 @@ public class ParkingSpace {
     private LocalDateTime exitTime;
 
     @Column(name = "tempo_em_andamento")
-    private long timeGoneBy; // em segundos
+    private Long timeGoneBy; // em segundos
 
     public ParkingSpace(){}
 
@@ -115,7 +115,7 @@ public class ParkingSpace {
         this.exitTime = exitTime;
     }
 
-    public long getTimeGoneBy() {
+    public Long getTimeGoneBy() {
         if (enterTime == null || exitTime == null) {
             throw new RuntimeException("Entrada ou saída não registrada.");
         }
@@ -125,7 +125,7 @@ public class ParkingSpace {
     }
 
 
-    public void setTimeGoneBy(long timeGoneBy) {
+    public void setTimeGoneBy(Long timeGoneBy) {
         this.timeGoneBy = timeGoneBy;
     }
 

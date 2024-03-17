@@ -1,6 +1,7 @@
 package com.upe.ProjetoElEstacionamento.Services;
 
 import com.upe.ProjetoElEstacionamento.Repositories.VehicleRepository;
+import com.upe.ProjetoElEstacionamento.model.VehicleTypes;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.upe.ProjetoElEstacionamento.Repositories.ParkingSpaceRepository;
@@ -29,16 +30,16 @@ public class ParkingSpaceService {
         ParkingSpace space = parkingSpaceRepository.findById(spaceId)
                 .orElseThrow(() -> new RuntimeException("Não há como fazer o pagamento, pois a vaga não foi encontrada com o ID especificado."));
         if (!space.isSpacePreferential()) {
-            if (space.getSpaceType().equals("MOTORCYCLE")) {
+            if (space.getSpaceType().equals(VehicleTypes.MOTORCYCLE)) {
                 space.setBaseRate(6.5);
                 space.setBaseRate(2.0);
-            } else if (space.getSpaceType().equals("BIKE")) {
+            } else if (space.getSpaceType().equals(VehicleTypes.BIKE)) {
                 space.setBaseRate(1.0);
                 space.setHourly_rate(0.25);
-            } else if (space.getSpaceType().equals("CAR")) {
+            } else if (space.getSpaceType().equals(VehicleTypes.CAR)) {
                 space.setBaseRate(11.5);
                 space.setHourly_rate(1.0);
-            } else if (space.getSpaceType().equals("BUS")) {
+            } else if (space.getSpaceType().equals(VehicleTypes.BUS)) {
                 space.setBaseRate(5.0);
                 space.setHourly_rate(0.5);
             }
