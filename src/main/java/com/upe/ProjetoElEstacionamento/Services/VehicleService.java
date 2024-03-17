@@ -35,6 +35,7 @@ public class VehicleService {
             return vehicleRepository.save(newVehicle);
         }
 
+        //criar lógica de tipo veículo e vaga
     }
     public void removeVehicleFromSpace(Long vehicleId) {
         Vehicle vehicle = vehicleRepository.findById(vehicleId)
