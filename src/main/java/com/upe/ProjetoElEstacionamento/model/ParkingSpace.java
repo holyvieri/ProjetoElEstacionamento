@@ -11,7 +11,7 @@ import javax.xml.crypto.Data;
 public class ParkingSpace {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long spaceId;
 
     @Column(name = "occupied")
     private boolean occupied;
@@ -36,9 +36,9 @@ public class ParkingSpace {
     public ParkingSpace(){
 
     }
-    public ParkingSpace(Long id, boolean occupied, boolean spacePreferential,
+    public ParkingSpace(Long spaceId, boolean occupied, boolean spacePreferential,
                         Double baseRate, Double hourly_rate, VehicleTypes spaceType, String date) {
-        this.id = id;
+        this.spaceId = spaceId;
         this.occupied = occupied;
         this.spacePreferential = spacePreferential;
         this.baseRate = baseRate;
@@ -47,12 +47,12 @@ public class ParkingSpace {
         this.date = date.substring(16,18);
     }
 
-    public Long getId() {
-        return id;
+    public Long getSpaceId() {
+        return spaceId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setSpaceId(Long spaceId) {
+        this.spaceId = spaceId;
     }
 
     public boolean isOccupied() {

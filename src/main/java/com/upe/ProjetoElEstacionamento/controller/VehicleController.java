@@ -27,8 +27,6 @@ public class VehicleController {
     @GetMapping  //esse tá pegando
     public ResponseEntity<List<Vehicle>> getAll() {
         List<Vehicle> veiculos = vehicleRepository.findAll();
-        ParkingSpace ps = new ParkingSpace();
-        System.out.println(ps.getDate());
         return ResponseEntity.ok(veiculos);
     }
     @GetMapping("/{id}")
