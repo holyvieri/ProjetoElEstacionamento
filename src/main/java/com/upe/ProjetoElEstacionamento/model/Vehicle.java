@@ -6,8 +6,6 @@ import javax.xml.crypto.Data;
 
 @Entity
 @Table(name = "vehicles")
-//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-//@DiscriminatorColumn(name = "vehicle_type", discriminatorType = DiscriminatorType.STRING)
 public class Vehicle {
 
     @Id

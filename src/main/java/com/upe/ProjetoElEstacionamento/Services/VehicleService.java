@@ -45,7 +45,6 @@ public class VehicleService {
             parkingSpace.setOccupied(false);
             parkingSpaceRepository.save(parkingSpace);
         }
-
         vehicleRepository.delete(vehicle);
     }
 
