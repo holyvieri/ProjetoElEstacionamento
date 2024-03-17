@@ -1,10 +1,13 @@
 package com.upe.ProjetoElEstacionamento.controller;
 
 import com.upe.ProjetoElEstacionamento.DTOs.VehicleDTO;
-import com.upe.ProjetoElEstacionamento.repositories.ParkingSpaceRepository;
-import com.upe.ProjetoElEstacionamento.repositories.VehicleRepository;
-import com.upe.ProjetoElEstacionamento.services.VehicleService;
+import com.upe.ProjetoElEstacionamento.Repositories.ParkingSpaceRepository;
+import com.upe.ProjetoElEstacionamento.Repositories.VehicleRepository;
+import com.upe.ProjetoElEstacionamento.Services.ParkingSpaceService;
+import com.upe.ProjetoElEstacionamento.Services.VehicleService;
+import com.upe.ProjetoElEstacionamento.model.ParkingSpace;
 import com.upe.ProjetoElEstacionamento.model.Vehicle;
+import com.upe.ProjetoElEstacionamento.model.VehicleTypes;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,12 +20,13 @@ public class VehicleController {
     private VehicleRepository vehicleRepository;
     private ParkingSpaceRepository parkingSpaceRepository;
     private VehicleService vehicleService;
+    private ParkingSpaceService parkingSpaceService;
     public VehicleController(VehicleRepository vehicleRepository, VehicleService vehicleService) {
         this.vehicleRepository = vehicleRepository;
         this.vehicleService = vehicleService;
     }
 
-    //GETs - O primeira retorna todos e o segundo retorna apenas um objeto pelo Id
+    //GET
     @GetMapping  //esse tá pegando
     public ResponseEntity<List<Vehicle>> getAll() {
         List<Vehicle> veiculos = vehicleRepository.findAll();
@@ -39,19 +43,23 @@ public class VehicleController {
         }
     }
 
-    //POST - vai receber um JSON do front para criar um objeto Vehicle
+
+    //POST
+    //vai receber JSON do front - DTO
     @CrossOrigin
-    @PostMapping("/create")
+    @PostMapping("/create") //estacionar
     public ResponseEntity<Vehicle> createVehicle(@RequestBody VehicleDTO vehicleDTO) {
         Vehicle newVehicle = vehicleService.createVehicle(vehicleDTO);
+        parkingSpaceService.startTiming(newVehicle.getParkingSpace().getSpaceId()); //começar a contar tempo em segundos
+
         return ResponseEntity.status(HttpStatus.CREATED).body(newVehicle);
-
     }
-
-    // DELETE - vai deletar o objeto pelo Id
-    @DeleteMapping("/deletar")
-    public ResponseEntity<Void> deleteVehicle(@RequestBody VehicleDTO vehicleDTO){
-        vehicleService.removeVehicleFromSpace(vehicleDTO.getParkingSpace().getId());
+    @DeleteMapping("/deletar/{id}")
+    public ResponseEntity<Void> deleteVehicle(@PathVariable Long id){
+        Vehicle vehicle = vehicleRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Veículo não encontrado."));
+        parkingSpaceService.endTiming(vehicle.getParkingSpace().getSpaceId());
+        vehicleService.removeVehicleFromSpace(id);
         return ResponseEntity.ok().build();
     }
 }

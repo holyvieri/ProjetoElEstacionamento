@@ -2,13 +2,16 @@ package com.upe.ProjetoElEstacionamento.model;
 
 import jakarta.persistence.*;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "parking_spaces")
 public class ParkingSpace {
-    // Atributos
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "id")
+    private Long spaceId;
 
     @Column(name = "occupied")
     private boolean occupied;
@@ -26,30 +29,34 @@ public class ParkingSpace {
     @Column(name = "space_type")
     private VehicleTypes spaceType;
 
-    @Column(name = "date")
-    private String date;
+    @Column(name = "entrada")
+    private LocalDateTime enterTime;
 
-    // Construtor
-    public ParkingSpace(Long id, boolean occupied, boolean spacePreferential,
-                        Double baseRate, Double hourly_rate, VehicleTypes spaceType, String date) {
-        this.id = id;
+    @Column(name = "saida")
+    private LocalDateTime exitTime;
+
+    @Column(name = "tempo_em_andamento")
+    private long timeGoneBy; // em segundos
+
+    public ParkingSpace(){}
+
+    public ParkingSpace(Long spaceId, boolean occupied, boolean spacePreferential,
+                        Double baseRate, Double hourly_rate, VehicleTypes spaceType) {
+        this.spaceId = spaceId;
         this.occupied = occupied;
         this.spacePreferential = spacePreferential;
         this.baseRate = baseRate;
         this.hourly_rate = hourly_rate;
         this.spaceType = spaceType;
-        this.date = date.substring(16,18);
+
     }
 
-    public ParkingSpace(){}
-
-    // Getters e Setters
-    public Long getId() {
-        return id;
+    public Long getSpaceId() {
+        return spaceId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setSpaceId(Long spaceId) {
+        this.spaceId = spaceId;
     }
 
     public boolean isOccupied() {
@@ -92,11 +99,34 @@ public class ParkingSpace {
         this.spaceType = spaceType;
     }
 
-    public String getDate() {
-        return date;
+    public LocalDateTime getEnterTime() {
+        return enterTime;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setEnterTime(LocalDateTime enterTime) {
+        this.enterTime = enterTime;
     }
+
+    public LocalDateTime getExitTime() {
+        return exitTime;
+    }
+
+    public void setExitTime(LocalDateTime exitTime) {
+        this.exitTime = exitTime;
+    }
+
+    public long getTimeGoneBy() {
+        if (enterTime == null || exitTime == null) {
+            throw new RuntimeException("Entrada ou saída não registrada.");
+        }
+        Duration duration = Duration.between(enterTime, exitTime);
+        timeGoneBy = duration.getSeconds();
+        return timeGoneBy; // Retorna o tempo decorrido em segundos
+    }
+
+
+    public void setTimeGoneBy(long timeGoneBy) {
+        this.timeGoneBy = timeGoneBy;
+    }
+
 }

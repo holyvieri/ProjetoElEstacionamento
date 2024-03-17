@@ -40,6 +40,7 @@ public class VehicleService {
             parkingSpace.setOccupied(true);
             parkingSpaceRepository.save(parkingSpace);
 
+
             return vehicleRepository.save(newVehicle);
         }
     }
