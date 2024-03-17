@@ -29,17 +29,34 @@ public class ParkingSpace {
     @Column(name = "space_type")
     private VehicleTypes spaceType;
 
+    @Column(name = "enter_time")
+    LocalDateTime enterTime;
 
+    @Column(name = "exit_time")
+    LocalDateTime exitTime;
+
+    public LocalDateTime getExitTime() {
+        return exitTime;
+    }
+
+    public void setExitTime(LocalDateTime exitTime) {
+        this.exitTime = exitTime;
+    }
+
+    public LocalDateTime getEnterTime() {
+        return enterTime;
+    }
+
+    public void setEnterTime(LocalDateTime enterTime) {
+        this.enterTime = enterTime;
+    }
 
     public ParkingSpace(){}
 
-    public ParkingSpace(Long spaceId, boolean occupied, boolean spacePreferential,
-                        Double baseRate, Double hourlyRate, VehicleTypes spaceType) {
+    public ParkingSpace(Long spaceId, boolean occupied, boolean spacePreferential, VehicleTypes spaceType) {
         this.spaceId = spaceId;
         this.occupied = occupied;
         this.spacePreferential = spacePreferential;
-        this.baseRate = baseRate;
-        this.hourlyRate = hourlyRate;
         this.spaceType = spaceType;
 
     }

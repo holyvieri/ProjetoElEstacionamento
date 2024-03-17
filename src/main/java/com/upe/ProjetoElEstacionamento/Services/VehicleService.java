@@ -10,6 +10,8 @@ import com.upe.ProjetoElEstacionamento.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 public class VehicleService {
     @Autowired
@@ -17,6 +19,7 @@ public class VehicleService {
 
     @Autowired
     private ParkingSpaceRepository parkingSpaceRepository;
+
 
     // Lógica para criar um novo veículo e associar à vaga correta
     public Vehicle createVehicle(VehicleDTO vehicleDTO) {
@@ -39,8 +42,8 @@ public class VehicleService {
                     vehicleDTO.getPreferential(), vehicleDTO.getVehicleType(), vehicleDTO.getParkingSpace());
             newVehicle.setParkingSpace(parkingSpace);
             parkingSpace.setOccupied(true);
+            parkingSpace.setEnterTime(LocalDateTime.now()); //tempo entrada
             parkingSpaceRepository.save(parkingSpace);
-
 
             return vehicleRepository.save(newVehicle);
         }
@@ -48,10 +51,10 @@ public class VehicleService {
     public void removeVehicleFromSpace(Long vehicleId) {
         Vehicle vehicle = vehicleRepository.findById(vehicleId)
                 .orElseThrow(() -> new RuntimeException("Veículo não encontrado."));
-
         ParkingSpace parkingSpace = vehicle.getParkingSpace();
         if (parkingSpace != null) {
             parkingSpace.setOccupied(false);
+            parkingSpace.setExitTime(LocalDateTime.now()); //tempo saida
             parkingSpaceRepository.save(parkingSpace);
         }
         vehicleRepository.delete(vehicle);
@@ -61,4 +64,6 @@ public class VehicleService {
         return vehicleRepository.findById(vehicleId)
                 .orElse(null);
     }
+
+
 }
