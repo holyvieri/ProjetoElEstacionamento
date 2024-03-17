@@ -18,7 +18,7 @@ public class VehicleService {
     public Vehicle createVehicle(VehicleDTO vehicleDTO) {
         // Lógica para criar um novo veículo e associar à vaga correta
         //achar id da vaga e checar se ela existe
-        ParkingSpace parkingSpace = parkingSpaceRepository.findById(vehicleDTO.getParkingSpace().getId())
+        ParkingSpace parkingSpace = parkingSpaceRepository.findById(vehicleDTO.getParkingSpace().getSpaceId())
                 .orElseThrow(() -> new RuntimeException("Vaga não encontrada com o ID especificado."));
 
         //checar se vaga tá ocupada
