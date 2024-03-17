@@ -34,6 +34,11 @@ public class ParkingSpace {
     @Column(name = "exit_time")
     LocalDateTime exitTime;
 
+    @Column(name = "vehicle_id")
+    private Long vehicleId;
+
+
+
     public LocalDateTime getExitTime() {
         return exitTime;
     }
@@ -107,6 +112,12 @@ public class ParkingSpace {
     public void setSpaceType(VehicleTypes spaceType) {
         this.spaceType = spaceType;
     }
+    public Long getVehicleId() {
+        return vehicleId;
+    }
 
+    public void setVehicleId(Long vehicleId) {
+        this.vehicleId = vehicleId;
+    }
 
 }

@@ -44,6 +44,9 @@ public class VehicleService {
             Vehicle newVehicle = new Vehicle(vehicleDTO.getOwnerName(), vehicleDTO.getLicensePlate(),
                     vehicleDTO.getPreferential(), vehicleDTO.getVehicleType(), vehicleDTO.getParkingSpace());
             newVehicle.setParkingSpace(parkingSpace);
+
+            Vehicle savedVehicle = vehicleRepository.save(newVehicle);
+            parkingSpace.setVehicleId(savedVehicle.getId());
             parkingSpace.setOccupied(true);
             parkingSpace.setEnterTime(LocalDateTime.now()); //tempo entrada
             parkingSpaceRepository.save(parkingSpace);
