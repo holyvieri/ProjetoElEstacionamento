@@ -44,7 +44,7 @@ public class ParkingSpace {
         this.baseRate = baseRate;
         this.hourly_rate = hourly_rate;
         this.spaceType = spaceType;
-        this.date = date;
+        this.date = date.substring(16,18);
     }
 
     public Long getId() {

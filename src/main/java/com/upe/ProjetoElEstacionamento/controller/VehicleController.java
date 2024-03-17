@@ -4,6 +4,7 @@ import com.upe.ProjetoElEstacionamento.DTOs.VehicleDTO;
 import com.upe.ProjetoElEstacionamento.Repositories.ParkingSpaceRepository;
 import com.upe.ProjetoElEstacionamento.Repositories.VehicleRepository;
 import com.upe.ProjetoElEstacionamento.Services.VehicleService;
+import com.upe.ProjetoElEstacionamento.model.ParkingSpace;
 import com.upe.ProjetoElEstacionamento.model.Vehicle;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,8 @@ public class VehicleController {
     @GetMapping  //esse tá pegando
     public ResponseEntity<List<Vehicle>> getAll() {
         List<Vehicle> veiculos = vehicleRepository.findAll();
+        ParkingSpace ps = new ParkingSpace();
+        System.out.println(ps.getDate());
         return ResponseEntity.ok(veiculos);
     }
     @GetMapping("/{id}")
