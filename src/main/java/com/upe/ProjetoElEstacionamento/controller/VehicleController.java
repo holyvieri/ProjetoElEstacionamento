@@ -55,8 +55,7 @@ public class VehicleController {
     @DeleteMapping("/deletar/{id}")
     public ResponseEntity<Void> deleteVehicle(@PathVariable Long id){
         Vehicle vehicle = vehicleRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Veículo não encontrado."));
-
+                .orElseThrow(() -> new RuntimeException("Não há como deletar o veículo, pois o id do veículo especificado não foi encontrado."));
         vehicleService.removeVehicleFromSpace(id);
         return ResponseEntity.ok().build();
     }
