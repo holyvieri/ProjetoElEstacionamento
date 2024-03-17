@@ -35,17 +35,17 @@ public class ParkingSpaceService {
                 space.setBaseRate(2.0);
             } else if (space.getSpaceType().equals(VehicleTypes.BIKE)) {
                 space.setBaseRate(1.0);
-                space.setHourly_rate(0.25);
+                space.setHourlyRate(0.25);
             } else if (space.getSpaceType().equals(VehicleTypes.CAR)) {
                 space.setBaseRate(11.5);
-                space.setHourly_rate(1.0);
+                space.setHourlyRate(1.0);
             } else if (space.getSpaceType().equals(VehicleTypes.BUS)) {
                 space.setBaseRate(5.0);
-                space.setHourly_rate(0.5);
+                space.setHourlyRate(0.5);
             }
             long time = space.getTimeGoneBy()/60;
             if(time > 1){
-                return (space.getBaseRate()+(space.getHourly_rate()*(time-1)));
+                return (space.getBaseRate()+(space.getHourlyRate()*(time-1)));
             }else{
                 return space.getBaseRate();
             }
