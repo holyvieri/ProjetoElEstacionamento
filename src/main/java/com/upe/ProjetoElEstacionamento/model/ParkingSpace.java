@@ -23,7 +23,7 @@ public class ParkingSpace {
     private Double baseRate;
 
     @Column(name = "hourly_rate")
-    private Double hourly_rate;
+    private Double hourlyRate;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "space_type")
@@ -41,12 +41,12 @@ public class ParkingSpace {
     public ParkingSpace(){}
 
     public ParkingSpace(Long spaceId, boolean occupied, boolean spacePreferential,
-                        Double baseRate, Double hourly_rate, VehicleTypes spaceType) {
+                        Double baseRate, Double hourlyRate, VehicleTypes spaceType) {
         this.spaceId = spaceId;
         this.occupied = occupied;
         this.spacePreferential = spacePreferential;
         this.baseRate = baseRate;
-        this.hourly_rate = hourly_rate;
+        this.hourlyRate = hourlyRate;
         this.spaceType = spaceType;
 
     }
@@ -83,12 +83,12 @@ public class ParkingSpace {
         this.baseRate = baseRate;
     }
 
-    public Double getHourly_rate() {
-        return hourly_rate;
+    public Double getHourlyRate() {
+        return hourlyRate;
     }
 
-    public void setHourly_rate(Double hourly_rate) {
-        this.hourly_rate = hourly_rate;
+    public void setHourlyRate(Double hourly_rate) {
+        this.hourlyRate = hourly_rate;
     }
 
     public VehicleTypes getSpaceType() {

@@ -4,9 +4,7 @@ import com.upe.ProjetoElEstacionamento.Repositories.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.upe.ProjetoElEstacionamento.Repositories.ParkingSpaceRepository;
-import com.upe.ProjetoElEstacionamento.Repositories.VehicleRepository;
 import com.upe.ProjetoElEstacionamento.model.ParkingSpace;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -34,17 +32,17 @@ public class ParkingSpaceService {
                 space.setBaseRate(2.0);
             } else if (space.getSpaceType().equals("BIKE")) {
                 space.setBaseRate(1.0);
-                space.setHourly_rate(0.25);
+                space.setHourlyRate(0.25);
             } else if (space.getSpaceType().equals("CAR")) {
                 space.setBaseRate(11.5);
-                space.setHourly_rate(1.0);
+                space.setHourlyRate(1.0);
             } else if (space.getSpaceType().equals("BUS")) {
                 space.setBaseRate(5.0);
-                space.setHourly_rate(0.5);
+                space.setHourlyRate(0.5);
             }
-            long time = space.getTimeGoneBy()/60;
+            Double time = space.getTimeGoneBy()/60.0;
             if(time > 1){
-                return (space.getBaseRate()+(space.getHourly_rate()*(time-1)));
+                return (space.getBaseRate()+(space.getHourlyRate()*(time-1)));
             }else{
                 return space.getBaseRate();
             }
