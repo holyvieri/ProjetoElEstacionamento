@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-@RequestMapping("/estacionamento/veiculo")
+@RequestMapping("/vehicles")
 public class VehicleController {
     private VehicleRepository vehicleRepository;
     private ParkingSpaceRepository parkingSpaceRepository;
@@ -52,7 +52,7 @@ public class VehicleController {
         Long newVehicle_id = vehicleService.createVehicle(vehicleDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(newVehicle_id);
     }
-    @DeleteMapping("/deletar/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteVehicle(@PathVariable Long id){
         Vehicle vehicle = vehicleRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Não há como deletar o veículo, pois o id do veículo especificado não foi encontrado."));

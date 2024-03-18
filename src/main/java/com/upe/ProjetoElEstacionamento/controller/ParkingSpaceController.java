@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/estacionamento/vagas")
+@RequestMapping("/parking_space")
 public class ParkingSpaceController {
     private ParkingSpaceRepository spaceRepository;
     private ParkingSpaceService spaceService;
