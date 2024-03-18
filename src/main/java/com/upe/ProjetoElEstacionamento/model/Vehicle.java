@@ -28,6 +28,7 @@ public class Vehicle {
     @JoinColumn(name = "parking_space")
     private ParkingSpace parkingSpace;
 
+    public Vehicle() {}
     // Construtores
     public Vehicle(String ownerName, String licensePlate, Boolean vehiclePreferential, VehicleTypes vehicleType,ParkingSpace parkingSpace) {
         this.ownerName = ownerName;
@@ -36,8 +37,6 @@ public class Vehicle {
         this.vehicleType = vehicleType;
         this.parkingSpace = parkingSpace;
     }
-
-    public Vehicle() {}
 
     // Getters and Setters
     public Long getId() {

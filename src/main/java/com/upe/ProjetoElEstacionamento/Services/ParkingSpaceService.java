@@ -1,6 +1,7 @@
 package com.upe.ProjetoElEstacionamento.Services;
 
 import com.upe.ProjetoElEstacionamento.Repositories.VehicleRepository;
+import com.upe.ProjetoElEstacionamento.model.Vehicle;
 import com.upe.ProjetoElEstacionamento.model.VehicleTypes;
 
 import com.upe.ProjetoElEstacionamento.Repositories.ParkingSpaceRepository;
@@ -17,15 +18,34 @@ import java.util.Map;
 
 @Service
 public class ParkingSpaceService {
-    private VehicleRepository vehicleRepository;
 
-    private ParkingSpaceRepository parkingSpaceRepository;
+    private final ParkingSpaceRepository parkingSpaceRepository;
+    private final VehicleRepository vehicleRepository;
+
+    public ParkingSpaceService(ParkingSpaceRepository parkingSpaceRepository, VehicleRepository vehicleRepository) {
+        this.parkingSpaceRepository = parkingSpaceRepository;
+        this.vehicleRepository = vehicleRepository;
+    }
 
     //achar objeto parkingSpace por id
     public ParkingSpace findById(Long spaceId){
         return parkingSpaceRepository.findById(spaceId)
                 .orElse(null);
     }
+
+    public int compareTo(Long vehicleId){
+        Vehicle vehicle = vehicleRepository.findBy(vehicleId).orElseThrow(() -> new RuntimeException("Não há como comparar a vaga e o veículo, pois o ID do veículo especificado não foi encontrado."));
+        // aq tenho um b.o, o compare to n pega outro parâmetro, ent eu deveria colocar o método no model? pq se eu fizer this.
+        // vai pegar... mas assim, não vai pegar o parkingSpace especificado e linkado com o veículo né
+        if ((this.findById(spaceID).isSpacePreferential() == vehicle.getPreferential()) &&
+                //aqui tenho um b.o, não sei como pegar a info do tipo(enum) do veículo
+                this.findById(spaceID).getSpaceType().equals(vehicle.getVehicleType()) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+
     public Double getTimeGoneBy(Long spaceId){
         ParkingSpace space = parkingSpaceRepository.findById(spaceId)
                 .orElseThrow(() -> new RuntimeException("Não há como contabilizar o tempo, pois a vaga não foi encontrada com o ID especificado."));
@@ -48,10 +68,12 @@ public class ParkingSpaceService {
             } else if (space.getSpaceType().equals(VehicleTypes.BUS)) {
                 space.setBaseRate(4.25);
                 space.setHourlyRate(0.50);
+            }else {
+                throw new RuntimeException("Não há como calcular o pagamento, pois o tipo de vaga e o tipo de veículo não são compatíveis.");
             }
             double time = getTimeGoneBy(spaceId)/60;
-            if(time > 1){
-                double payment = space.getBaseRate()+(space.getHourlyRate()*(time-1));
+            if(time > 1.00){
+                double payment = space.getBaseRate()+(space.getHourlyRate()*(time-1.00));
                 return Double.parseDouble(String.format("%.2f", payment));
             }else{
                 return space.getBaseRate();

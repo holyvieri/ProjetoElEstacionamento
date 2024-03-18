@@ -16,9 +16,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/vehicles")
 public class VehicleController {
-    private VehicleRepository vehicleRepository;
+    private final VehicleRepository vehicleRepository;
     private ParkingSpaceRepository parkingSpaceRepository;
-    private VehicleService vehicleService;
+    private final VehicleService vehicleService;
     private ParkingSpaceService parkingSpaceService;
     public VehicleController(VehicleRepository vehicleRepository, VehicleService vehicleService) {
         this.vehicleRepository = vehicleRepository;
