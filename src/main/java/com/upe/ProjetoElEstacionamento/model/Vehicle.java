@@ -24,8 +24,8 @@ public class Vehicle {
     @Column(name = "vehicle_type")
     private VehicleTypes vehicleType;
 
-    @OneToOne
-    @JoinColumn(name = "parking_space")
+
+    @Column(name = "parking_space")
     private Long spaceId;
 
     public Vehicle() {}
