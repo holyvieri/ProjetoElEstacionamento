@@ -3,7 +3,6 @@ package com.upe.ProjetoElEstacionamento.Services;
 import com.upe.ProjetoElEstacionamento.DTOs.VehicleDTO;
 import com.upe.ProjetoElEstacionamento.exceptions.IncompatibleTypesException;
 import com.upe.ProjetoElEstacionamento.exceptions.NotFoundVacancyException;
-import com.upe.ProjetoElEstacionamento.exceptions.NotFoundVehicleException;
 import com.upe.ProjetoElEstacionamento.exceptions.VacancyOccupiedException;
 import com.upe.ProjetoElEstacionamento.Repositories.*;
 import com.upe.ProjetoElEstacionamento.model.*;
@@ -14,9 +13,8 @@ import java.time.LocalDateTime;
 
 @Service
 public class VehicleService {
-    private VehicleRepository vehicleRepository;
-
-    private ParkingSpaceRepository parkingSpaceRepository;
+    private final VehicleRepository vehicleRepository;
+    private final ParkingSpaceRepository parkingSpaceRepository;
 
     @Autowired
     public VehicleService(VehicleRepository vehicleRepository, ParkingSpaceRepository parkingSpaceRepository) {
@@ -27,19 +25,17 @@ public class VehicleService {
     // Lógica para criar um novo veículo e associar à vaga correta
     public Long createVehicle(VehicleDTO vehicleDTO) {
         // Achar id da vaga e checar se ela existe
-
+        //clear time
         ParkingSpace parkingSpace = parkingSpaceRepository.findById(vehicleDTO.getParkingSpace().getSpaceId())
                 .orElseThrow(NotFoundVacancyException::new);
         //checar se vaga tá ocupada
         if (parkingSpace.isOccupied()) {
             // Checar se vaga tá ocupada
             throw new VacancyOccupiedException();
-        }
-        else if (parkingSpace.getSpaceType() != vehicleDTO.getVehicleType()) {
+        } else if (parkingSpace.getSpaceType() != vehicleDTO.getVehicleType()) {
             // Checar se a vaga tem o mesmo tipo do veículo
             throw new IncompatibleTypesException();
-        }
-        else {
+        } else {
             // Cria um novo veículo com base nos dados do DTO
             Vehicle newVehicle = new Vehicle(vehicleDTO.getOwnerName(), vehicleDTO.getLicensePlate(),
                     vehicleDTO.getPreferential(), vehicleDTO.getVehicleType(), vehicleDTO.getParkingSpace());
@@ -56,7 +52,7 @@ public class VehicleService {
     }
     public void removeVehicleFromSpace(Long vehicleId) {
         Vehicle vehicle = vehicleRepository.findById(vehicleId)
-                .orElseThrow(() -> new RuntimeException("Não há como remover o veículo da vaga, pois o id do veículo especificado não foi encontrado."));
+                .orElseThrow(() -> new RuntimeException("Não há como remover o veículo da vaga, pois o ID do veículo especificado não foi encontrado."));
         ParkingSpace parkingSpace = vehicle.getParkingSpace();
         if (parkingSpace != null) {
             parkingSpace.setOccupied(false);

@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "parking_spaces")
 public class ParkingSpace {
+    //Atributos
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -37,26 +38,9 @@ public class ParkingSpace {
     @Column(name = "vehicle_id")
     private Long vehicleId;
 
-
-
-    public LocalDateTime getExitTime() {
-        return exitTime;
-    }
-
-    public void setExitTime(LocalDateTime exitTime) {
-        this.exitTime = exitTime;
-    }
-
-    public LocalDateTime getEnterTime() {
-        return enterTime;
-    }
-
-    public void setEnterTime(LocalDateTime enterTime) {
-        this.enterTime = enterTime;
-    }
-
     public ParkingSpace(){}
 
+    //Construtor
     public ParkingSpace(Long spaceId, boolean occupied, boolean spacePreferential, VehicleTypes spaceType) {
         this.spaceId = spaceId;
         this.occupied = occupied;
@@ -65,6 +49,7 @@ public class ParkingSpace {
 
     }
 
+    //Getters e Setters
     public Long getSpaceId() {
         return spaceId;
     }
@@ -118,6 +103,21 @@ public class ParkingSpace {
 
     public void setVehicleId(Long vehicleId) {
         this.vehicleId = vehicleId;
+    }
+    public LocalDateTime getExitTime() {
+        return exitTime;
+    }
+
+    public void setExitTime(LocalDateTime exitTime) {
+        this.exitTime = exitTime;
+    }
+
+    public LocalDateTime getEnterTime() {
+        return enterTime;
+    }
+
+    public void setEnterTime(LocalDateTime enterTime) {
+        this.enterTime = enterTime;
     }
 
 }

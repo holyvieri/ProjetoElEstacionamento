@@ -11,8 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -58,7 +56,7 @@ public class VehicleController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteVehicle(@PathVariable Long id){
         Vehicle vehicle = vehicleRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Não há como deletar o veículo, pois o id do veículo especificado não foi encontrado."));
+                .orElseThrow(() -> new RuntimeException("Não há como deletar o veículo, pois o ID do veículo especificado não foi encontrado."));
         vehicleService.removeVehicleFromSpace(id);
         return ResponseEntity.ok().build();
     }
