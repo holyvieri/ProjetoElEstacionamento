@@ -22,6 +22,8 @@ public class ParkingSpace {
     @Column(name = "base_rate")
     private Double baseRate;
 
+
+
     @Column(name = "hourly_rate")
     private Double hourlyRate;
 

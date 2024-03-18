@@ -8,6 +8,11 @@ import com.upe.ProjetoElEstacionamento.model.ParkingSpace;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 @Service
@@ -54,5 +59,15 @@ public class ParkingSpaceService {
         }else{
             return 0.00;
         }
+    }
+
+    public Map<String,LocalDateTime> getEnterAndExitTime(Long spaceId) {
+        ParkingSpace space = parkingSpaceRepository.findById(spaceId)
+                .orElseThrow(() -> new RuntimeException("A vaga não foi encontrada com o ID especificado."));
+
+        Map<String,LocalDateTime> timestamps = new HashMap<>();
+        timestamps.put("enterTime", space.getEnterTime());
+        timestamps.put("exitTime", space.getExitTime());
+        return timestamps;
     }
 }
