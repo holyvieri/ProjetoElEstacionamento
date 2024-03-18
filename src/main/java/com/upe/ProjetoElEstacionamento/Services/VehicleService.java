@@ -33,7 +33,10 @@ public class VehicleService {
             // Checar se vaga tá ocupada
             throw new VacancyOccupiedException();
         } else if (parkingSpace.getSpaceType() != vehicleDTO.getVehicleType()) {
-            // Checar se a vaga tem o mesmo tipo do veículo
+            // Checar se a vaga tem o mesmo tipo do veículo e agr checa se possui o critério preferencial
+            if (parkingSpace.isSpacePreferential() != vehicleDTO.getPreferential()){
+                throw new IncompatibleTypesException();
+            }
             throw new IncompatibleTypesException();
         } else {
             // Cria um novo veículo com base nos dados do DTO

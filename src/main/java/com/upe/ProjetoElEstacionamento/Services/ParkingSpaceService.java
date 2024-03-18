@@ -34,7 +34,7 @@ public class ParkingSpaceService {
         // vai pegar... mas assim, não vai pegar o parkingSpace especificado e linkado com o veículo né
         if ((this.findById(spaceID).isSpacePreferential() == vehicle.getPreferential()) &&
                 //aqui tenho um b.o, não sei como pegar a info do tipo(enum) do veículo
-                this.findById(spaceID).getSpaceType().equals(vehicle.getVehicleType()) {
+                this.findById(spaceID).getSpaceType().equals(vehicle.getVehicleType()){
             return 0;
         } else {
             return 1;
