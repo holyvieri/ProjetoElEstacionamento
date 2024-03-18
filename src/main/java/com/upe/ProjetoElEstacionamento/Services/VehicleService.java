@@ -34,12 +34,10 @@ public class VehicleService {
         if (parkingSpace.isOccupied()) {
             // Checar se vaga tá ocupada
             throw new VacancyOccupiedException();
-        }
-        else if (parkingSpace.getSpaceType() != vehicleDTO.getVehicleType()) {
+        } else if (parkingSpace.getSpaceType() != vehicleDTO.getVehicleType()) {
             // Checar se a vaga tem o mesmo tipo do veículo
             throw new IncompatibleTypesException();
-        }
-        else {
+        } else {
             // Cria um novo veículo com base nos dados do DTO
             Vehicle newVehicle = new Vehicle(vehicleDTO.getOwnerName(), vehicleDTO.getLicensePlate(),
                     vehicleDTO.getPreferential(), vehicleDTO.getVehicleType(), vehicleDTO.getParkingSpace());
