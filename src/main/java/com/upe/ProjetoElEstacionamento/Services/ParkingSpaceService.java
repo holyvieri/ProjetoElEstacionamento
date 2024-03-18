@@ -37,7 +37,7 @@ public class ParkingSpaceService {
     public Double payment(Long spaceId){
         ParkingSpace space = parkingSpaceRepository.findById(spaceId)
                 .orElseThrow(() -> new RuntimeException("Não há como fazer o pagamento, pois a vaga não foi encontrada com o ID especificado."));
-        if (!space.isSpacePreferential()) {
+        if (space.isSpacePreferential() == false) {
             if (space.getSpaceType().equals(VehicleTypes.MOTORCYCLE)) {
                 space.setBaseRate(6.50);
                 space.setBaseRate(2.00);

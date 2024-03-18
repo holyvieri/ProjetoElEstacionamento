@@ -1,6 +1,7 @@
 package com.upe.ProjetoElEstacionamento.Services;
 
 import com.upe.ProjetoElEstacionamento.DTOs.VehicleDTO;
+import com.upe.ProjetoElEstacionamento.exceptions.IncompatiblePreferentialsException;
 import com.upe.ProjetoElEstacionamento.exceptions.IncompatibleTypesException;
 import com.upe.ProjetoElEstacionamento.exceptions.NotFoundVacancyException;
 import com.upe.ProjetoElEstacionamento.exceptions.VacancyOccupiedException;
@@ -32,12 +33,12 @@ public class VehicleService {
         if (parkingSpace.isOccupied()) {
             // Checar se vaga tá ocupada
             throw new VacancyOccupiedException();
-        } else if (parkingSpace.getSpaceType() != vehicleDTO.getVehicleType()) {
-            // Checar se a vaga tem o mesmo tipo do veículo e agr checa se possui o critério preferencial
-            if (parkingSpace.isSpacePreferential() != vehicleDTO.getPreferential()){
-                throw new IncompatibleTypesException();
-            }
+        } else if (!parkingSpace.getSpaceType().equals(vehicleDTO.getVehicleType())) {
+            // Checar se a vaga tem o mesmo tipo do veículo
             throw new IncompatibleTypesException();
+        } else if (parkingSpace.isSpacePreferential() != vehicleDTO.getPreferential()) {
+            //Checar se possui o msm critério preferencial
+            throw new IncompatiblePreferentialsException();
         } else {
             // Cria um novo veículo com base nos dados do DTO
             Vehicle newVehicle = new Vehicle(vehicleDTO.getOwnerName(), vehicleDTO.getLicensePlate(),
