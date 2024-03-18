@@ -25,7 +25,7 @@ public class VehicleService {
     }
 
     // Lógica para criar um novo veículo e associar à vaga correta
-    public Vehicle createVehicle(VehicleDTO vehicleDTO) {
+    public Long createVehicle(VehicleDTO vehicleDTO) {
         // Achar id da vaga e checar se ela existe
 
         ParkingSpace parkingSpace = parkingSpaceRepository.findById(vehicleDTO.getParkingSpace().getSpaceId())
@@ -51,7 +51,7 @@ public class VehicleService {
             parkingSpace.setEnterTime(LocalDateTime.now()); //tempo entrada
             parkingSpaceRepository.save(parkingSpace);
 
-            return vehicleRepository.save(newVehicle);
+            return savedVehicle.getId();
         }
     }
     public void removeVehicleFromSpace(Long vehicleId) {

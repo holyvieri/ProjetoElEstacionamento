@@ -48,9 +48,9 @@ public class VehicleController {
     //vai receber JSON do front - DTO
     @CrossOrigin
     @PostMapping("/create") //estacionar
-    public ResponseEntity<Vehicle> createVehicle(@RequestBody VehicleDTO vehicleDTO) {
-        Vehicle newVehicle = vehicleService.createVehicle(vehicleDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(newVehicle);
+    public ResponseEntity<Long> createVehicle(@RequestBody VehicleDTO vehicleDTO) {
+        Long newVehicle_id = vehicleService.createVehicle(vehicleDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(newVehicle_id);
     }
     @DeleteMapping("/deletar/{id}")
     public ResponseEntity<Void> deleteVehicle(@PathVariable Long id){
