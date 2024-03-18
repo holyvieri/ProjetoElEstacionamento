@@ -42,11 +42,11 @@ public class ParkingSpaceController {
 
     @CrossOrigin
     @GetMapping("/payment/{id}")
-    public ResponseEntity<PaymentDTO> getPayment(@PathVariable Long id){
-        Double payment = spaceService.payment(id);
+    public ResponseEntity<PaymentDTO> getPayment(@PathVariable Long id) {
+        Map<String, Double> map = spaceService.payment(id);
         Map<String, LocalDateTime> timestamps = spaceService.getEnterAndExitTime(id);
-        if (payment != null && timestamps != null) {
-            PaymentDTO paymentDTO = new PaymentDTO(payment, timestamps);
+        if (map != null && timestamps != null) {
+            PaymentDTO paymentDTO = new PaymentDTO(map, timestamps);
             return ResponseEntity.ok(paymentDTO);
         } else {
             return ResponseEntity.notFound().build();
