@@ -44,7 +44,7 @@ public class ParkingSpaceService {
                 space.setBaseRate(11.50);
                 space.setHourlyRate(1.00);
             } else if (space.getSpaceType().equals(VehicleTypes.BUS)) {
-                space.setBaseRate(4.50);
+                space.setBaseRate(4.25);
                 space.setHourlyRate(0.50);
             }
             double time = getTimeGoneBy(spaceId)/60;
