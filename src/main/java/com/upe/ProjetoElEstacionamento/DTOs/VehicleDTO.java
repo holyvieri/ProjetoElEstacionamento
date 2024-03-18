@@ -8,7 +8,7 @@ public class VehicleDTO {
     private String licensePlate;
     private Boolean preferential;
     private VehicleTypes vehicleType;
-    private ParkingSpace parkingSpace;
+    private Long parkingSpace;
 
     public String getOwnerName() {
         return ownerName;
@@ -42,11 +42,11 @@ public class VehicleDTO {
         this.vehicleType = vehicleType;
     }
 
-    public ParkingSpace getParkingSpace() {
+    public Long getParkingSpace() {
         return parkingSpace;
     }
 
-    public void setParkingSpace(ParkingSpace parkingSpace) {
+    public void setParkingSpace(Long parkingSpace) {
         this.parkingSpace = parkingSpace;
     }
 
