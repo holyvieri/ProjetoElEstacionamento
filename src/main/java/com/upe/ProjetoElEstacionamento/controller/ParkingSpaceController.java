@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -25,7 +26,8 @@ public class ParkingSpaceController {
     @CrossOrigin
     @GetMapping
     public List<ParkingSpace> getAll() {
-        return spaceRepository.findAll();
+        List<ParkingSpace> orderedParkingSpaces = spaceRepository.findAll().stream().sorted(Comparator.comparing(ParkingSpace::getSpaceId)).toList();
+        return orderedParkingSpaces;
     }
 
     @CrossOrigin
