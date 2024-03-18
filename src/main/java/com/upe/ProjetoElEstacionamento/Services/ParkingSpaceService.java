@@ -8,6 +8,7 @@ import com.upe.ProjetoElEstacionamento.Repositories.ParkingSpaceRepository;
 import com.upe.ProjetoElEstacionamento.model.ParkingSpace;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 @Service
@@ -23,8 +24,13 @@ public class ParkingSpaceService {
         return parkingSpaceRepository.findById(spaceId)
                 .orElse(null);
     }
+    public Double getTimeGoneBy(Long spaceId){
+        ParkingSpace space = parkingSpaceRepository.findById(spaceId)
+                .orElseThrow(() -> new RuntimeException("Erro na definição do tempo."));
+        return (double) Duration.between(space.getEnterTime(), space.getExitTime()).getSeconds();
+    }
 
-    /*public Double payment(Long spaceId){
+    public Double payment(Long spaceId){
         ParkingSpace space = parkingSpaceRepository.findById(spaceId)
                 .orElseThrow(() -> new RuntimeException("Não há como fazer o pagamento, pois a vaga não foi encontrada com o ID especificado."));
         if (!space.isSpacePreferential()) {
@@ -41,7 +47,7 @@ public class ParkingSpaceService {
                 space.setBaseRate(5.0);
                 space.setHourlyRate(0.5);
             }
-            long time = space.getTimeGoneBy()/60;
+            double time = getTimeGoneBy(spaceId)/60;
             if(time > 1){
                 return (space.getBaseRate()+(space.getHourlyRate()*(time-1)));
             }else{
@@ -50,6 +56,8 @@ public class ParkingSpaceService {
         }else{
             return 0.0;
         }
-    }*/
+    }
+
+    
 
 }
