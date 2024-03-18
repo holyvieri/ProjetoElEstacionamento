@@ -23,7 +23,7 @@ public class ParkingSpaceService {
     }
     public Double getTimeGoneBy(Long spaceId){
         ParkingSpace space = parkingSpaceRepository.findById(spaceId)
-                .orElseThrow(() -> new RuntimeException("Erro na definição do tempo."));
+                .orElseThrow(() -> new RuntimeException("Não há como contabilizar o tempo, pois a vaga não foi encontrada com o ID especificado."));
         return (double) Duration.between(space.getEnterTime(), space.getExitTime()).getSeconds();
     }
 
