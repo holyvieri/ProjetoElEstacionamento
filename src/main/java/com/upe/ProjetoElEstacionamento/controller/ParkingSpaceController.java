@@ -27,6 +27,7 @@ public class ParkingSpaceController {
         return spaceRepository.findAll();
     }
 
+    @CrossOrigin
     @GetMapping("/{id}")
     public ResponseEntity<ParkingSpace> getSpaceById(@PathVariable Long id) {
         ParkingSpace space = spaceRepository.findById(id)
@@ -38,6 +39,7 @@ public class ParkingSpaceController {
         }
     }
 
+    @CrossOrigin
     @GetMapping("/payment/{id}")
     public ResponseEntity<Double> getPayment(@PathVariable Long id){
         Double payment = spaceService.payment(id);

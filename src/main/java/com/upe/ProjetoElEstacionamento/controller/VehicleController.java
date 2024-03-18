@@ -28,11 +28,13 @@ public class VehicleController {
     }
 
     //GET
+    @CrossOrigin
     @GetMapping  //esse tá pegando
     public ResponseEntity<List<Vehicle>> getAll() {
         List<Vehicle> veiculos = vehicleRepository.findAll();
         return ResponseEntity.ok(veiculos);
     }
+    @CrossOrigin
     @GetMapping("/{id}")
     public ResponseEntity<Vehicle> getVehicleById(@PathVariable Long id) {
         Vehicle vehicle = vehicleRepository.findById(id)
@@ -52,6 +54,7 @@ public class VehicleController {
         Long newVehicle_id = vehicleService.createVehicle(vehicleDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(newVehicle_id);
     }
+    @CrossOrigin
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteVehicle(@PathVariable Long id){
         Vehicle vehicle = vehicleRepository.findById(id)
