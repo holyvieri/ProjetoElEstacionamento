@@ -12,9 +12,12 @@ import java.time.Duration;
 
 @Service
 public class ParkingSpaceService {
-    private VehicleRepository vehicleRepository;
 
-    private ParkingSpaceRepository parkingSpaceRepository;
+    private final ParkingSpaceRepository parkingSpaceRepository;
+
+    public ParkingSpaceService(ParkingSpaceRepository parkingSpaceRepository) {
+        this.parkingSpaceRepository = parkingSpaceRepository;
+    }
 
     //achar objeto parkingSpace por id
     public ParkingSpace findById(Long spaceId){
