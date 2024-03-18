@@ -48,7 +48,7 @@ public class ParkingSpaceService {
 
         if (space.getSpaceType().equals(VehicleTypes.MOTORCYCLE)) {
             space.setBaseRate(6.50);
-            space.setBaseRate(2.00);
+            space.setHourlyRate(2.00);
         } else if (space.getSpaceType().equals(VehicleTypes.BIKE)) {
             space.setBaseRate(1.00);
             space.setHourlyRate(0.25);
