@@ -2,21 +2,18 @@ package com.upe.ProjetoElEstacionamento.Services;
 
 import com.upe.ProjetoElEstacionamento.Repositories.VehicleRepository;
 import com.upe.ProjetoElEstacionamento.model.VehicleTypes;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.upe.ProjetoElEstacionamento.Repositories.ParkingSpaceRepository;
 import com.upe.ProjetoElEstacionamento.model.ParkingSpace;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
-import java.time.LocalDateTime;
+
 
 @Service
 public class ParkingSpaceService {
-    @Autowired
     private VehicleRepository vehicleRepository;
 
-    @Autowired
     private ParkingSpaceRepository parkingSpaceRepository;
 
     //achar objeto parkingSpace por id
@@ -49,7 +46,8 @@ public class ParkingSpaceService {
             }
             double time = getTimeGoneBy(spaceId)/60;
             if(time > 1){
-                return (space.getBaseRate()+(space.getHourlyRate()*(time-1)));
+                double payment = space.getBaseRate()+(space.getHourlyRate()*(time-1));
+                return Double.parseDouble(String.format("%.2f", payment));
             }else{
                 return space.getBaseRate();
             }
@@ -57,7 +55,4 @@ public class ParkingSpaceService {
             return 0.00;
         }
     }
-
-    
-
 }

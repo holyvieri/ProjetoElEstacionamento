@@ -1,10 +1,8 @@
 package com.upe.ProjetoElEstacionamento.controller;
 
 import com.upe.ProjetoElEstacionamento.Repositories.ParkingSpaceRepository;
-import com.upe.ProjetoElEstacionamento.Repositories.VehicleRepository;
 import com.upe.ProjetoElEstacionamento.Services.ParkingSpaceService;
 import com.upe.ProjetoElEstacionamento.model.ParkingSpace;
-import com.upe.ProjetoElEstacionamento.model.Vehicle;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,8 +11,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/parking_space")
 public class ParkingSpaceController {
-    private ParkingSpaceRepository spaceRepository;
-    private ParkingSpaceService spaceService;
+    private final ParkingSpaceRepository spaceRepository;
+    private final ParkingSpaceService spaceService;
 
     public ParkingSpaceController(ParkingSpaceRepository spaceRepository, ParkingSpaceService spaceService) {
         this.spaceRepository = spaceRepository;
