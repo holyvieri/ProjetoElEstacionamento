@@ -35,17 +35,17 @@ public class ParkingSpaceService {
                 .orElseThrow(() -> new RuntimeException("Não há como fazer o pagamento, pois a vaga não foi encontrada com o ID especificado."));
         if (!space.isSpacePreferential()) {
             if (space.getSpaceType().equals(VehicleTypes.MOTORCYCLE)) {
-                space.setBaseRate(6.5);
-                space.setBaseRate(2.0);
+                space.setBaseRate(6.50);
+                space.setBaseRate(2.00);
             } else if (space.getSpaceType().equals(VehicleTypes.BIKE)) {
-                space.setBaseRate(1.0);
+                space.setBaseRate(1.00);
                 space.setHourlyRate(0.25);
             } else if (space.getSpaceType().equals(VehicleTypes.CAR)) {
-                space.setBaseRate(11.5);
-                space.setHourlyRate(1.0);
+                space.setBaseRate(11.50);
+                space.setHourlyRate(1.00);
             } else if (space.getSpaceType().equals(VehicleTypes.BUS)) {
-                space.setBaseRate(5.0);
-                space.setHourlyRate(0.5);
+                space.setBaseRate(4.50);
+                space.setHourlyRate(0.50);
             }
             double time = getTimeGoneBy(spaceId)/60;
             if(time > 1){
@@ -54,7 +54,7 @@ public class ParkingSpaceService {
                 return space.getBaseRate();
             }
         }else{
-            return 0.0;
+            return 0.00;
         }
     }
 
