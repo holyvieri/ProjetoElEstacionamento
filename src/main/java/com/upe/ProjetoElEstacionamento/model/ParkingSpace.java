@@ -1,5 +1,6 @@
 package com.upe.ProjetoElEstacionamento.model;
 
+import com.upe.ProjetoElEstacionamento.Repositories.VehicleRepository;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -37,6 +38,7 @@ public class ParkingSpace {
 
     @Column(name = "vehicle_id")
     private Long vehicleId;
+
 
     public ParkingSpace(){}
 
