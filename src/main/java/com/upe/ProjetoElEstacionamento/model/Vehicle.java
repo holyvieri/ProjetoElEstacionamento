@@ -24,18 +24,18 @@ public class Vehicle {
     @Column(name = "vehicle_type")
     private VehicleTypes vehicleType;
 
-    @OneToOne
-    @JoinColumn(name = "parking_space")
-    private ParkingSpace parkingSpace;
+
+    @Column(name = "parking_space")
+    private Long spaceId;
 
     public Vehicle() {}
     // Construtores
-    public Vehicle(String ownerName, String licensePlate, Boolean vehiclePreferential, VehicleTypes vehicleType,ParkingSpace parkingSpace) {
+    public Vehicle(String ownerName, String licensePlate, Boolean vehiclePreferential, VehicleTypes vehicleType,Long spaceId) {
         this.ownerName = ownerName;
         this.licensePlate = licensePlate;
         this.vehiclePreferential = vehiclePreferential;
         this.vehicleType = vehicleType;
-        this.parkingSpace = parkingSpace;
+        this.spaceId = spaceId;
     }
 
     // Getters and Setters
@@ -71,11 +71,11 @@ public class Vehicle {
         this.vehiclePreferential = vehiclePreferential;
     }
 
-    public ParkingSpace getParkingSpace() {
-        return parkingSpace;
+    public Long getParkingSpace() {
+        return spaceId;
     }
 
-    public void setParkingSpace(ParkingSpace parkingSpace) {
-        this.parkingSpace = parkingSpace;
+    public void setParkingSpace(Long parkingSpace) {
+        this.spaceId = parkingSpace;
     }
 }

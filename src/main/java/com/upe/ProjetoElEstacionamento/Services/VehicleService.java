@@ -1,9 +1,7 @@
 package com.upe.ProjetoElEstacionamento.Services;
 
 import com.upe.ProjetoElEstacionamento.DTOs.VehicleDTO;
-import com.upe.ProjetoElEstacionamento.exceptions.IncompatibleTypesException;
-import com.upe.ProjetoElEstacionamento.exceptions.NotFoundVacancyException;
-import com.upe.ProjetoElEstacionamento.exceptions.VacancyOccupiedException;
+import com.upe.ProjetoElEstacionamento.exceptions.*;
 import com.upe.ProjetoElEstacionamento.Repositories.*;
 import com.upe.ProjetoElEstacionamento.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,20 +24,23 @@ public class VehicleService {
     public Long createVehicle(VehicleDTO vehicleDTO) {
         // Achar id da vaga e checar se ela existe
         //clear time
-        ParkingSpace parkingSpace = parkingSpaceRepository.findById(vehicleDTO.getParkingSpace().getSpaceId())
+        ParkingSpace parkingSpace = parkingSpaceRepository.findById(vehicleDTO.getParkingSpace())
                 .orElseThrow(NotFoundVacancyException::new);
         //checar se vaga tá ocupada
         if (parkingSpace.isOccupied()) {
             // Checar se vaga tá ocupada
             throw new VacancyOccupiedException();
-        } else if (parkingSpace.getSpaceType() != vehicleDTO.getVehicleType()) {
+        } else if (!parkingSpace.getSpaceType().equals(vehicleDTO.getVehicleType())) {
             // Checar se a vaga tem o mesmo tipo do veículo
             throw new IncompatibleTypesException();
+        } else if (parkingSpace.isSpacePreferential() != vehicleDTO.getPreferential()) {
+            //Checar se possui o msm critério preferencial
+            throw new IncompatiblePreferentialsException();
         } else {
             // Cria um novo veículo com base nos dados do DTO
             Vehicle newVehicle = new Vehicle(vehicleDTO.getOwnerName(), vehicleDTO.getLicensePlate(),
                     vehicleDTO.getPreferential(), vehicleDTO.getVehicleType(), vehicleDTO.getParkingSpace());
-            newVehicle.setParkingSpace(parkingSpace);
+            newVehicle.setParkingSpace(parkingSpace.getSpaceId());
 
             Vehicle savedVehicle = vehicleRepository.save(newVehicle);
             parkingSpace.setVehicleId(savedVehicle.getId());
@@ -52,8 +53,9 @@ public class VehicleService {
     }
     public void removeVehicleFromSpace(Long vehicleId) {
         Vehicle vehicle = vehicleRepository.findById(vehicleId)
-                .orElseThrow(() -> new RuntimeException("Não há como remover o veículo da vaga, pois o ID do veículo especificado não foi encontrado."));
-        ParkingSpace parkingSpace = vehicle.getParkingSpace();
+                .orElseThrow(() -> new NotFoundVehicleException("Não há como remover o veículo da vaga, pois o "));
+        ParkingSpace parkingSpace = parkingSpaceRepository.findById(vehicle.getParkingSpace())
+                .orElseThrow(NotFoundVacancyException::new);
         if (parkingSpace != null) {
             parkingSpace.setOccupied(false);
             parkingSpace.setVehicleId(null);
