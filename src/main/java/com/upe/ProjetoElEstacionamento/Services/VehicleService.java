@@ -26,7 +26,7 @@ public class VehicleService {
     public Long createVehicle(VehicleDTO vehicleDTO) {
         // Achar id da vaga e checar se ela existe
         //clear time
-        ParkingSpace parkingSpace = parkingSpaceRepository.findById(vehicleDTO.getParkingSpace().getSpaceId())
+        ParkingSpace parkingSpace = parkingSpaceRepository.findById(vehicleDTO.getParkingSpace())
                 .orElseThrow(NotFoundVacancyException::new);
         //checar se vaga tá ocupada
         if (parkingSpace.isOccupied()) {
@@ -39,7 +39,7 @@ public class VehicleService {
             // Cria um novo veículo com base nos dados do DTO
             Vehicle newVehicle = new Vehicle(vehicleDTO.getOwnerName(), vehicleDTO.getLicensePlate(),
                     vehicleDTO.getPreferential(), vehicleDTO.getVehicleType(), vehicleDTO.getParkingSpace());
-            newVehicle.setParkingSpace(parkingSpace);
+            newVehicle.setParkingSpace(parkingSpace.getSpaceId());
 
             Vehicle savedVehicle = vehicleRepository.save(newVehicle);
             parkingSpace.setVehicleId(savedVehicle.getId());
@@ -53,7 +53,8 @@ public class VehicleService {
     public void removeVehicleFromSpace(Long vehicleId) {
         Vehicle vehicle = vehicleRepository.findById(vehicleId)
                 .orElseThrow(() -> new RuntimeException("Não há como remover o veículo da vaga, pois o ID do veículo especificado não foi encontrado."));
-        ParkingSpace parkingSpace = vehicle.getParkingSpace();
+        ParkingSpace parkingSpace = parkingSpaceRepository.findById(vehicle.getParkingSpace())
+                .orElseThrow(NotFoundVacancyException::new);
         if (parkingSpace != null) {
             parkingSpace.setOccupied(false);
             parkingSpace.setVehicleId(null);

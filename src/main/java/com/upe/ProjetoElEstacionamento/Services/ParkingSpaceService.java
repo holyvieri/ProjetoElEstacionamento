@@ -28,19 +28,6 @@ public class ParkingSpaceService {
                 .orElse(null);
     }
 
-    public int compareTo(Long vehicleId){
-        Vehicle vehicle = vehicleRepository.findBy(vehicleId).orElseThrow(() -> new RuntimeException("Não há como comparar a vaga e o veículo, pois o ID do veículo especificado não foi encontrado."));
-        // aq tenho um b.o, o compare to n pega outro parâmetro, ent eu deveria colocar o método no model? pq se eu fizer this.
-        // vai pegar... mas assim, não vai pegar o parkingSpace especificado e linkado com o veículo né
-        if ((this.findById(spaceID).isSpacePreferential() == vehicle.getPreferential()) &&
-                //aqui tenho um b.o, não sei como pegar a info do tipo(enum) do veículo
-                this.findById(spaceID).getSpaceType().equals(vehicle.getVehicleType()) {
-            return 0;
-        } else {
-            return 1;
-        }
-    }
-
     public Double getTimeGoneBy(Long spaceId){
         ParkingSpace space = parkingSpaceRepository.findById(spaceId)
                 .orElseThrow(() -> new RuntimeException("Não há como contabilizar o tempo, pois a vaga não foi encontrada com o ID especificado."));
