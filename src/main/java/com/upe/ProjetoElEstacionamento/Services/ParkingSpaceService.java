@@ -1,6 +1,8 @@
 package com.upe.ProjetoElEstacionamento.Services;
 
 import com.upe.ProjetoElEstacionamento.Repositories.VehicleRepository;
+import com.upe.ProjetoElEstacionamento.exceptions.IncompatibleTypesException;
+import com.upe.ProjetoElEstacionamento.exceptions.NotFoundVacancyException;
 import com.upe.ProjetoElEstacionamento.model.Vehicle;
 import com.upe.ProjetoElEstacionamento.model.VehicleTypes;
 
@@ -30,13 +32,13 @@ public class ParkingSpaceService {
 
     public Double getTimeGoneBy(Long spaceId){
         ParkingSpace space = parkingSpaceRepository.findById(spaceId)
-                .orElseThrow(() -> new RuntimeException("Não há como contabilizar o tempo, pois a vaga não foi encontrada com o ID especificado."));
+                .orElseThrow(() -> new NotFoundVacancyException("Não há como contabilizar o tempo, pois o "));
         return (double) Duration.between(space.getEnterTime(), space.getExitTime()).getSeconds();
     }
 
     public Double payment(Long spaceId){
         ParkingSpace space = parkingSpaceRepository.findById(spaceId)
-                .orElseThrow(() -> new RuntimeException("Não há como fazer o pagamento, pois a vaga não foi encontrada com o ID especificado."));
+                .orElseThrow(() -> new NotFoundVacancyException("Não há como fazer o pagamento, pois o "));
         if (space.isSpacePreferential() == false) {
             if (space.getSpaceType().equals(VehicleTypes.MOTORCYCLE)) {
                 space.setBaseRate(6.50);
@@ -51,7 +53,7 @@ public class ParkingSpaceService {
                 space.setBaseRate(4.25);
                 space.setHourlyRate(0.50);
             }else {
-                throw new RuntimeException("Não há como calcular o pagamento, pois o tipo de vaga e o tipo de veículo não são compatíveis.");
+                throw new IncompatibleTypesException("Não há como calcular o pagamento");
             }
             double time = getTimeGoneBy(spaceId)/60;
             if(time > 1.00){

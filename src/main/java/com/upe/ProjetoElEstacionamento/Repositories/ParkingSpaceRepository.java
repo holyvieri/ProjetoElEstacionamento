@@ -9,4 +9,3 @@ import org.springframework.stereotype.Repository;
 public interface ParkingSpaceRepository extends JpaRepository<ParkingSpace, Long> {
 
 }
-

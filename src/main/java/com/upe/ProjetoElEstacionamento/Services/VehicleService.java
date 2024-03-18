@@ -1,10 +1,7 @@
 package com.upe.ProjetoElEstacionamento.Services;
 
 import com.upe.ProjetoElEstacionamento.DTOs.VehicleDTO;
-import com.upe.ProjetoElEstacionamento.exceptions.IncompatiblePreferentialsException;
-import com.upe.ProjetoElEstacionamento.exceptions.IncompatibleTypesException;
-import com.upe.ProjetoElEstacionamento.exceptions.NotFoundVacancyException;
-import com.upe.ProjetoElEstacionamento.exceptions.VacancyOccupiedException;
+import com.upe.ProjetoElEstacionamento.exceptions.*;
 import com.upe.ProjetoElEstacionamento.Repositories.*;
 import com.upe.ProjetoElEstacionamento.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +53,7 @@ public class VehicleService {
     }
     public void removeVehicleFromSpace(Long vehicleId) {
         Vehicle vehicle = vehicleRepository.findById(vehicleId)
-                .orElseThrow(() -> new RuntimeException("Não há como remover o veículo da vaga, pois o ID do veículo especificado não foi encontrado."));
+                .orElseThrow(() -> new NotFoundVehicleException("Não há como remover o veículo da vaga, pois o "));
         ParkingSpace parkingSpace = parkingSpaceRepository.findById(vehicle.getParkingSpace())
                 .orElseThrow(NotFoundVacancyException::new);
         if (parkingSpace != null) {

@@ -2,6 +2,7 @@ package com.upe.ProjetoElEstacionamento.controller;
 
 import com.upe.ProjetoElEstacionamento.DTOs.VehicleDTO;
 import com.upe.ProjetoElEstacionamento.Services.ParkingSpaceService;
+import com.upe.ProjetoElEstacionamento.exceptions.NotFoundVehicleException;
 import com.upe.ProjetoElEstacionamento.model.Vehicle;
 import com.upe.ProjetoElEstacionamento.Repositories.ParkingSpaceRepository;
 import com.upe.ProjetoElEstacionamento.Repositories.VehicleRepository;
@@ -53,7 +54,7 @@ public class VehicleController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteVehicle(@PathVariable Long id){
         Vehicle vehicle = vehicleRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Não há como deletar o veículo, pois o ID do veículo especificado não foi encontrado."));
+                .orElseThrow(() -> new NotFoundVehicleException("Não há como deletar o veículo, pois o "));
         vehicleService.removeVehicleFromSpace(id);
         return ResponseEntity.ok().build();
     }
